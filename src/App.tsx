@@ -4,7 +4,7 @@ import Coins from "./routes/Coins.tsx";
 import {createGlobalStyle} from 'styled-components'
 
 
-const GlobalStyle = createGlobalStyle<{ $whiteColor?: boolean; }>`
+const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&display=swap');
 
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -76,6 +76,9 @@ const GlobalStyle = createGlobalStyle<{ $whiteColor?: boolean; }>`
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
+    background-color: ${(props) => props.theme.bgColor};
+    color: ${(props) => props.theme.textColor};
+    accent-color: ${(props) => props.theme.accentColor};
   }
 
   a {
