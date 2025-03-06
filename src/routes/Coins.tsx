@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import {Link} from "react-router";
 import {useEffect, useState} from "react";
+import {CoinItem, CoinList, Container, Header, Img, Loader, Title} from "../components/styled-ui.tsx";
 
 type CoinItem = {
   id: string;
@@ -11,54 +11,6 @@ type CoinItem = {
   is_active: boolean;
   type: string;
 }
-
-const Container = styled.div`
-  padding: 0 20px;
-  max-width: 480px;
-  margin: 0 auto;
-`;
-
-const Header = styled.header`
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CoinList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const CoinItem = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
-  padding: 20px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: color .2s ease-in-out;
-
-  &:hover {
-    color: ${(props) => props.theme.accentColor};
-  }
-`;
-
-const Title = styled.h1`
-  color: ${(props) => props.theme.accentColor};
-  font-size: 48px;
-`;
-
-const Loader = styled.span`
-  text-align: center;
-`;
-
-const Img = styled.img`
-  width: 35px;
-  height: 35px;
-`
 
 const MAX_COIN_COUNT = 100;
 
