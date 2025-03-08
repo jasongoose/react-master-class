@@ -1,7 +1,8 @@
 import {Link} from "react-router";
 import {useQuery} from "@tanstack/react-query";
 
-import {CoinItem, CoinList, Container, Header, Img, Loader, Title} from "../components/styled-ui.tsx";
+import {CoinItem, CoinList, Container, Header, Img, Title} from "../components/styled-ui.tsx";
+import Loader from "../components/Loader.tsx";
 
 type CoinItem = {
   id: string;
@@ -33,14 +34,16 @@ function Coins() {
           <Title>Coins</Title>
         </Header>
         <CoinList>
-          {isCoinListFetching ? <Loader>Loading...</Loader> : coinList.map((coin) => (
-              <Link to={`/${coin['id']}`} state={{name: coin['name']}} key={coin['id']}>
-                <CoinItem key={coin['id']}>
-                  <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin['symbol'].toLowerCase()}`} alt=""/>
-                  {coin['name']} &rarr;
-                </CoinItem>
-              </Link>
-          ))}
+          <Loader isLoading={isCoinListFetching}>
+            {coinList.map((coin) => (
+                <Link to={`/${coin['id']}`} state={{name: coin['name']}} key={coin['id']}>
+                  <CoinItem key={coin['id']}>
+                    <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin['symbol'].toLowerCase()}`} alt=""/>
+                    {coin['name']} &rarr;
+                  </CoinItem>
+                </Link>
+            ))}
+          </Loader>
         </CoinList>
       </Container>
   )

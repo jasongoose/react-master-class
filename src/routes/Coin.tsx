@@ -1,17 +1,8 @@
 import {Link, Outlet, useMatch, useParams} from "react-router";
 import {useQuery} from '@tanstack/react-query'
 
-import {
-  Container,
-  Description,
-  Header,
-  Loader,
-  Overview,
-  OverviewItem,
-  Tab,
-  Tabs,
-  Title
-} from "../components/styled-ui.tsx";
+import {Container, Description, Header, Overview, OverviewItem, Tab, Tabs, Title} from "../components/styled-ui.tsx";
+import Loader from "../components/Loader.tsx";
 
 type Params = {
   coinId?: string;
@@ -105,47 +96,45 @@ function Coin() {
 
   return (
       <Container>
-        {isFetching ? <Loader>Loading...</Loader> : (
-            <>
-              <Header>
-                <Title>{detailsData?.['name']}</Title>
-              </Header>
-              <Overview>
-                <OverviewItem>
-                  <span>Rank:</span>
-                  <span>{detailsData?.['rank']}</span>
-                </OverviewItem>
-                <OverviewItem>
-                  <span>Symbol:</span>
-                  <span>${detailsData?.['symbol']}</span>
-                </OverviewItem>
-                <OverviewItem>
-                  <span>Open Source:</span>
-                  <span>{detailsData?.['open_source'] ? "Yes" : "No"}</span>
-                </OverviewItem>
-              </Overview>
-              <Description>{detailsData?.['description']}</Description>
-              <Overview>
-                <OverviewItem>
-                  <span>Total Suply:</span>
-                  <span>{priceData?.['total_supply']}</span>
-                </OverviewItem>
-                <OverviewItem>
-                  <span>Max Supply:</span>
-                  <span>{priceData?.['max_supply']}</span>
-                </OverviewItem>
-              </Overview>
-              <Tabs>
-                <Link to={`/${coinId}/chart`}>
-                  <Tab $isActive={chartPathMatch !== null}>Chart</Tab>
-                </Link>
-                <Link to={`/${coinId}/price`}>
-                  <Tab $isActive={pricePathMatch !== null}>Price</Tab>
-                </Link>
-              </Tabs>
-              <Outlet context={{coinId}}/>
-            </>
-        )}
+        <Loader isLoading={isFetching}>
+          <Header>
+            <Title>{detailsData?.['name']}</Title>
+          </Header>
+          <Overview>
+            <OverviewItem>
+              <span>Rank:</span>
+              <span>{detailsData?.['rank']}</span>
+            </OverviewItem>
+            <OverviewItem>
+              <span>Symbol:</span>
+              <span>${detailsData?.['symbol']}</span>
+            </OverviewItem>
+            <OverviewItem>
+              <span>Open Source:</span>
+              <span>{detailsData?.['open_source'] ? "Yes" : "No"}</span>
+            </OverviewItem>
+          </Overview>
+          <Description>{detailsData?.['description']}</Description>
+          <Overview>
+            <OverviewItem>
+              <span>Total Suply:</span>
+              <span>{priceData?.['total_supply']}</span>
+            </OverviewItem>
+            <OverviewItem>
+              <span>Max Supply:</span>
+              <span>{priceData?.['max_supply']}</span>
+            </OverviewItem>
+          </Overview>
+          <Tabs>
+            <Link to={`/${coinId}/chart`}>
+              <Tab $isActive={chartPathMatch !== null}>Chart</Tab>
+            </Link>
+            <Link to={`/${coinId}/price`}>
+              <Tab $isActive={pricePathMatch !== null}>Price</Tab>
+            </Link>
+          </Tabs>
+          <Outlet context={{coinId}}/>
+        </Loader>
       </Container>
   )
 }

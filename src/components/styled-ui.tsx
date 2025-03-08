@@ -120,10 +120,6 @@ export const Title = styled.h1`
   font-size: 48px;
 `;
 
-export const Loader = styled.h1`
-  text-align: center;
-`;
-
 export const Img = styled.img.attrs({loading: 'lazy'})`
   width: 35px;
   height: 35px;
