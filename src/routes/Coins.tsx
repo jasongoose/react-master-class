@@ -1,8 +1,10 @@
 import {Link} from "react-router";
 import {useQuery} from "@tanstack/react-query";
+import {Helmet} from "react-helmet";
 
 import {CoinItem, CoinList, Container, Header, Img, Title} from "../components/styled-ui.tsx";
 import Loader from "../components/Loader.tsx";
+
 
 type CoinItem = {
   id: string;
@@ -30,6 +32,9 @@ function Coins() {
 
   return (
       <Container>
+        <Helmet>
+          <title>Coins</title>
+        </Helmet>
         <Header>
           <Title>Coins</Title>
         </Header>

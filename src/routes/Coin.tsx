@@ -1,5 +1,6 @@
 import {Link, Outlet, useMatch, useParams} from "react-router";
-import {useQuery} from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query';
+import {Helmet} from "react-helmet";
 
 import {Container, Description, Header, Overview, OverviewItem, Tab, Tabs, Title} from "../components/styled-ui.tsx";
 import Loader from "../components/Loader.tsx";
@@ -97,6 +98,9 @@ function Coin() {
 
   return (
       <Container>
+        <Helmet>
+          <title>{detailsData?.['name']}</title>
+        </Helmet>
         <Loader isLoading={isFetching}>
           <Header>
             <Title>{detailsData?.['name']}</Title>
