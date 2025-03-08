@@ -34,6 +34,7 @@ function Chart() {
     queryKey: [coinId, 'ohlcv'],
     queryFn: () => fetchCoinOhlcv(coinId),
     enabled: !!coinId,
+    refetchInterval: 10_000,
   });
 
   const closePriceData = (ohlcvData ?? []).map((ohlcv) => parseFloat(ohlcv['close']));

@@ -90,6 +90,7 @@ function Coin() {
   const {isFetching: isTickersFetching, data: priceData} = useQuery({
     queryKey: [coinId, 'tickers'],
     queryFn: () => fetchCoinTickers(coinId),
+    refetchInterval: 5_000,
   });
 
   const isFetching = isDetailsFetching || isTickersFetching;
@@ -110,8 +111,8 @@ function Coin() {
               <span>${detailsData?.['symbol']}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{detailsData?.['open_source'] ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>${priceData?.['quotes']['USD']['price'].toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{detailsData?.['description']}</Description>
@@ -133,8 +134,8 @@ function Coin() {
               <Tab $isActive={pricePathMatch !== null}>Price</Tab>
             </Link>
           </Tabs>
-          <Outlet context={{coinId}}/>
         </Loader>
+        <Outlet context={{coinId}}/>
       </Container>
   )
 }
