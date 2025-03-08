@@ -15,9 +15,8 @@ type CoinItem = {
 
 const MAX_COIN_COUNT = 100;
 
-const fetchCoinList = async () => {
-  const coinListData: CoinItem[] = await fetch('https://api.coinpaprika.com/v1/coins').then((res) => res.json());
-  return coinListData;
+const fetchCoinList = async (): Promise<CoinItem[]> => {
+  return fetch('https://api.coinpaprika.com/v1/coins').then((res) => res.json());
 };
 
 function Coins() {

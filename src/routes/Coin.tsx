@@ -72,14 +72,14 @@ type PriceData = {
   };
 }
 
-const fetchCoinDetails = async (coinId?: string) => {
+const fetchCoinDetails = async (coinId?: string): Promise<DetailsData> => {
   if (!coinId) {
     throw new Error('CoinId not found');
   }
   return fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`).then(res => res.json());
 };
 
-const fetchCoinTickers = async (coinId?: string) => {
+const fetchCoinTickers = async (coinId?: string): Promise<PriceData> => {
   if (!coinId) {
     throw new Error('CoinId not found');
   }
@@ -91,12 +91,12 @@ function Coin() {
   const chartPathMatch = useMatch('/:coinId/chart');
   const pricePathMatch = useMatch('/:coinId/price');
 
-  const {isFetching: isDetailsFetching, data: detailsData} = useQuery<DetailsData>({
+  const {isFetching: isDetailsFetching, data: detailsData} = useQuery({
     queryKey: [coinId, 'details'],
     queryFn: () => fetchCoinDetails(coinId),
   });
 
-  const {isFetching: isTickersFetching, data: priceData} = useQuery<PriceData>({
+  const {isFetching: isTickersFetching, data: priceData} = useQuery({
     queryKey: [coinId, 'tickers'],
     queryFn: () => fetchCoinTickers(coinId),
   });
@@ -143,7 +143,7 @@ function Coin() {
                   <Tab $isActive={pricePathMatch !== null}>Price</Tab>
                 </Link>
               </Tabs>
-              <Outlet/>
+              <Outlet context={{coinId}}/>
             </>
         )}
       </Container>
