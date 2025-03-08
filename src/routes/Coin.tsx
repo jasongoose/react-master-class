@@ -1,4 +1,6 @@
 import {Link, Outlet, useMatch, useParams} from "react-router";
+import {useQuery} from '@tanstack/react-query'
+
 import {
   Container,
   Description,
@@ -10,7 +12,6 @@ import {
   Tabs,
   Title
 } from "../components/styled-ui.tsx";
-import {useEffect, useState} from "react";
 
 type Params = {
   coinId?: string;
@@ -71,11 +72,17 @@ type PriceData = {
   };
 }
 
-const fetchCoinDetails = async (coinId: string) => {
+const fetchCoinDetails = async (coinId?: string) => {
+  if (!coinId) {
+    throw new Error('CoinId not found');
+  }
   return fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`).then(res => res.json());
 };
 
-const fetchCoinTickers = async (coinId: string) => {
+const fetchCoinTickers = async (coinId?: string) => {
+  if (!coinId) {
+    throw new Error('CoinId not found');
+  }
   return fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`).then(res => res.json());
 }
 
@@ -84,24 +91,21 @@ function Coin() {
   const chartPathMatch = useMatch('/:coinId/chart');
   const pricePathMatch = useMatch('/:coinId/price');
 
-  const [detailsData, setDetailsData] = useState<DetailsData | null>(null);
-  const [priceData, setPriceData] = useState<PriceData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const {isFetching: isDetailsFetching, data: detailsData} = useQuery<DetailsData>({
+    queryKey: [coinId, 'details'],
+    queryFn: () => fetchCoinDetails(coinId),
+  });
 
-  useEffect(() => {
-    (async () => {
-      if (!coinId) return;
+  const {isFetching: isTickersFetching, data: priceData} = useQuery<PriceData>({
+    queryKey: [coinId, 'tickers'],
+    queryFn: () => fetchCoinTickers(coinId),
+  });
 
-      setIsLoading(true);
-      setDetailsData(await fetchCoinDetails(coinId));
-      setPriceData(await fetchCoinTickers(coinId));
-      setIsLoading(false);
-    })();
-  }, [coinId]);
+  const isFetching = isDetailsFetching || isTickersFetching;
 
   return (
       <Container>
-        {isLoading ? <Loader>Loading...</Loader> : (
+        {isFetching ? <Loader>Loading...</Loader> : (
             <>
               <Header>
                 <Title>{detailsData?.['name']}</Title>
@@ -131,17 +135,17 @@ function Coin() {
                   <span>{priceData?.['max_supply']}</span>
                 </OverviewItem>
               </Overview>
+              <Tabs>
+                <Link to={`/${coinId}/chart`}>
+                  <Tab $isActive={chartPathMatch !== null}>Chart</Tab>
+                </Link>
+                <Link to={`/${coinId}/price`}>
+                  <Tab $isActive={pricePathMatch !== null}>Price</Tab>
+                </Link>
+              </Tabs>
+              <Outlet/>
             </>
         )}
-        <Tabs>
-          <Link to={`/${coinId}/chart`}>
-            <Tab $isActive={chartPathMatch !== null}>Chart</Tab>
-          </Link>
-          <Link to={`/${coinId}/price`}>
-            <Tab $isActive={pricePathMatch !== null}>Price</Tab>
-          </Link>
-        </Tabs>
-        <Outlet/>
       </Container>
   )
 }

@@ -1,5 +1,6 @@
 import {Link} from "react-router";
-import {useEffect, useState} from "react";
+import {useQuery} from "@tanstack/react-query";
+
 import {CoinItem, CoinList, Container, Header, Img, Loader, Title} from "../components/styled-ui.tsx";
 
 type CoinItem = {
@@ -16,20 +17,16 @@ const MAX_COIN_COUNT = 100;
 
 const fetchCoinList = async () => {
   const coinListData: CoinItem[] = await fetch('https://api.coinpaprika.com/v1/coins').then((res) => res.json());
-  return coinListData.slice(0, MAX_COIN_COUNT);
+  return coinListData;
 };
 
 function Coins() {
-  const [coinList, setCoinList] = useState<CoinItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const {isFetching: isCoinListFetching, data: coinListData} = useQuery({
+    queryKey: ['all-coins'],
+    queryFn: fetchCoinList,
+  });
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      setCoinList(await fetchCoinList());
-      setIsLoading(false);
-    })()
-  }, []);
+  const coinList = (coinListData ?? []).slice(0, MAX_COIN_COUNT);
 
   return (
       <Container>
@@ -37,8 +34,8 @@ function Coins() {
           <Title>Coins</Title>
         </Header>
         <CoinList>
-          {isLoading ? <Loader>Loading...</Loader> : coinList.map((coin) => (
-              <Link to={`/${coin['id']}`} state={{name: coin['name']}}>
+          {isCoinListFetching ? <Loader>Loading...</Loader> : coinList.map((coin) => (
+              <Link to={`/${coin['id']}`} state={{name: coin['name']}} key={coin['id']}>
                 <CoinItem key={coin['id']}>
                   <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin['symbol'].toLowerCase()}`} alt=""/>
                   {coin['name']} &rarr;
