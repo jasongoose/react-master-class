@@ -4,6 +4,7 @@ import Coin from "./routes/Coin.tsx";
 import Coins from "./routes/Coins.tsx";
 import Price from "./routes/Price.tsx";
 import Chart from "./routes/Chart.tsx";
+import TodoList from './routes/TodoList.tsx';
 import {GlobalStyle} from "./components/styled-ui.tsx";
 
 
@@ -18,6 +19,7 @@ function App() {
               <Route path="price" element={<Price/>}/>
               <Route path="chart" element={<Chart/>}/>
             </Route>
+            <Route path="/todo-list" element={<TodoList/>}/>
           </Routes>
         </BrowserRouter>
       </>
