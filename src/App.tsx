@@ -1,5 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router";
 
+
 import Coin from "./routes/Coin.tsx";
 import Coins from "./routes/Coins.tsx";
 import Price from "./routes/Price.tsx";
@@ -9,6 +10,7 @@ import {GlobalStyle} from "./components/styled-ui.tsx";
 
 
 function App() {
+
   return (
       <>
         <GlobalStyle/>
