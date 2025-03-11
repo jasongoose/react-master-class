@@ -1,37 +1,38 @@
-import {PrimitiveAtom, useAtom} from "jotai";
 import {MouseEventHandler} from "react";
+import {useSetAtom} from 'jotai';
 
-import {TodoItemData} from "../atoms.ts";
+import {TodoItemData, todosAtom} from "../atoms.ts";
 
 type Props = {
-  todoAtom: PrimitiveAtom<TodoItemData>
+  todoData: TodoItemData
 }
 
-function TodoItem({todoAtom}: Props) {
-  const [todo, setTodo] = useAtom(todoAtom);
+function TodoItem({todoData}: Props) {
+  const setTodos = useSetAtom((todosAtom));
 
   const handleTodoButtonClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     const category = event.currentTarget.name as TodoItemData['category'];
 
-    setTodo((prev) => {
-      const newTodo: TodoItemData = {
-        ...prev,
-        category,
-      }
-      return newTodo;
-    });
+    setTodos((prev) => {
+      const newTodo = {...todoData, category} as TodoItemData;
+
+      return prev.reduce((acc, curr) => {
+        acc.push(curr['id'] === todoData['id'] ? newTodo : curr);
+        return acc;
+      }, [] as TodoItemData[]);
+    })
   }
 
   return (
       <li>
-        <span>{todo['text']}</span>
-        {todo['category'] !== 'DOING' ?
+        <span>{todoData['text']}</span>
+        {todoData['category'] !== 'DOING' ?
             <button name="DOING" onClick={handleTodoButtonClick}>Doing</button> : null}
 
-        {todo['category'] !== 'TODO' ?
+        {todoData['category'] !== 'TODO' ?
             <button name="TODO" onClick={handleTodoButtonClick}>To Do</button> : null}
 
-        {todo['category'] !== 'DONE' ? <button name="DONE" onClick={handleTodoButtonClick}>Done</button> : null}
+        {todoData['category'] !== 'DONE' ? <button name="DONE" onClick={handleTodoButtonClick}>Done</button> : null}
       </li>
   );
 }

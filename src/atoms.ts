@@ -1,5 +1,4 @@
-import {atom} from "jotai/index";
-import {splitAtom} from "jotai/utils";
+import {atom} from "jotai";
 
 export type TodoItemData = {
   text: string;
@@ -9,4 +8,8 @@ export type TodoItemData = {
 
 export const todosAtom = atom<TodoItemData[]>([]);
 
-export const splitTodosAtom = splitAtom(todosAtom);
+export const todoListAtom = atom((get) => get(todosAtom).filter((todo) => todo['category'] === 'TODO'));
+
+export const doingListAtom = atom((get) => get(todosAtom).filter((todo) => todo['category'] === 'DOING'));
+
+export const doneListAtom = atom((get) => get(todosAtom).filter((todo) => todo['category'] === 'DONE'));

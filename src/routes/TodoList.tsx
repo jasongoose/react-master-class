@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useAtomValue, useSetAtom} from "jotai";
 
-import {splitTodosAtom, type TodoItemData, todosAtom} from "../atoms.ts";
+import {doingListAtom, doneListAtom, type TodoItemData, todoListAtom, todosAtom} from "../atoms.ts";
 import TodoItem from "../components/TodoItem.tsx";
 
 type FormData = {
@@ -10,7 +10,12 @@ type FormData = {
 
 function TodoList() {
   const setTodos = useSetAtom(todosAtom);
-  const todoAtoms = useAtomValue(splitTodosAtom);
+
+  const todoList = useAtomValue(todoListAtom);
+
+  const doingList = useAtomValue(doingListAtom);
+
+  const doneList = useAtomValue(doneListAtom);
 
   const {register, watch, handleSubmit, formState, setError, setValue} = useForm<FormData>({});
 
@@ -23,6 +28,7 @@ function TodoList() {
       };
       return [newTodo, ...prev];
     });
+
     setValue('todo', "");
   }
 
@@ -33,6 +39,7 @@ function TodoList() {
   return (
       <>
         <h1>Todo List</h1>
+
         <form action="" onSubmit={handleSubmit(onValid, onInvalid)}>
           <input {...register('todo', {
             required: "Please write a todo"
@@ -42,7 +49,17 @@ function TodoList() {
 
         <h2>TODO</h2>
         <ul>
-          {todoAtoms.map((todo) => <TodoItem todoAtom={todo}/>)}
+          {todoList.map((todo) => <TodoItem todoData={todo}/>)}
+        </ul>
+
+        <h2>DOING</h2>
+        <ul>
+          {doingList.map((todo) => <TodoItem todoData={todo}/>)}
+        </ul>
+
+        <h2>DONE</h2>
+        <ul>
+          {doneList.map((todo) => <TodoItem todoData={todo}/>)}
         </ul>
       </>
   );
