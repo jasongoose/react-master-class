@@ -1,7 +1,7 @@
 import {MouseEventHandler} from "react";
 import {useSetAtom} from 'jotai';
 
-import {TodoItemData, todosAtom} from "../atoms.ts";
+import {Category, TodoItemData, todosAtom} from "../atoms.ts";
 
 type Props = {
   todoData: TodoItemData
@@ -26,13 +26,14 @@ function TodoItem({todoData}: Props) {
   return (
       <li>
         <span>{todoData['text']}</span>
-        {todoData['category'] !== 'DOING' ?
+        {todoData['category'] !== Category.DOING ?
             <button name="DOING" onClick={handleTodoButtonClick}>Doing</button> : null}
 
-        {todoData['category'] !== 'TODO' ?
+        {todoData['category'] !== Category.TODO ?
             <button name="TODO" onClick={handleTodoButtonClick}>To Do</button> : null}
 
-        {todoData['category'] !== 'DONE' ? <button name="DONE" onClick={handleTodoButtonClick}>Done</button> : null}
+        {todoData['category'] !== Category.DONE ?
+            <button name="DONE" onClick={handleTodoButtonClick}>Done</button> : null}
       </li>
   );
 }

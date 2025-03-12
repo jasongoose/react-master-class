@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useAtomValue, useSetAtom} from "jotai";
 
-import {doingListAtom, doneListAtom, type TodoItemData, todoListAtom, todosAtom} from "../atoms.ts";
+import {Category, doingListAtom, doneListAtom, type TodoItemData, todoListAtom, todosAtom} from "../atoms.ts";
 import TodoItem from "../components/TodoItem.tsx";
 
 type FormData = {
@@ -24,7 +24,7 @@ function TodoList() {
       const newTodo: TodoItemData = {
         text: formData['todo'] ?? '',
         id: Date.now(),
-        category: "TODO",
+        category: Category.TODO,
       };
       return [newTodo, ...prev];
     });
@@ -49,17 +49,17 @@ function TodoList() {
 
         <h2>TODO</h2>
         <ul>
-          {todoList.map((todo) => <TodoItem todoData={todo}/>)}
+          {todoList.map((todo) => <TodoItem key={todo['id']} todoData={todo}/>)}
         </ul>
 
         <h2>DOING</h2>
         <ul>
-          {doingList.map((todo) => <TodoItem todoData={todo}/>)}
+          {doingList.map((todo) => <TodoItem key={todo['id']} todoData={todo}/>)}
         </ul>
 
         <h2>DONE</h2>
         <ul>
-          {doneList.map((todo) => <TodoItem todoData={todo}/>)}
+          {doneList.map((todo) => <TodoItem key={todo['id']} todoData={todo}/>)}
         </ul>
       </>
   );
