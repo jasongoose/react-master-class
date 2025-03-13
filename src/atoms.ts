@@ -6,13 +6,13 @@ export enum Category {
   DONE = 'DONE',
 }
 
-export type TodoItemData = {
+export type TaskData = {
   text: string;
   id: number;
   category: Category;
 }
 
-export const todosAtom = atom<TodoItemData[]>([]);
+export const todosAtom = atom<TaskData[]>([]);
 
 export const todoListAtom = atom((get) => get(todosAtom).filter((todo) => todo['category'] === Category.TODO));
 

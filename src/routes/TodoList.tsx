@@ -1,21 +1,20 @@
 import {useForm} from "react-hook-form";
-import {useAtomValue, useSetAtom} from "jotai";
 
-import {Category, doingListAtom, doneListAtom, type TodoItemData, todoListAtom, todosAtom} from "../atoms.ts";
+import {Category, type TaskData as TodoItemData} from "../atoms.ts";
 import TodoItem from "../components/TodoItem.tsx";
+import {useTodo} from "../hooks/useTodo.tsx";
 
 type FormData = {
   todo?: string;
 }
 
 function TodoList() {
-  const setTodos = useSetAtom(todosAtom);
-
-  const todoList = useAtomValue(todoListAtom);
-
-  const doingList = useAtomValue(doingListAtom);
-
-  const doneList = useAtomValue(doneListAtom);
+  const {
+    todoList,
+    doingList,
+    doneList,
+    setTodos,
+  } = useTodo();
 
   const {register, watch, handleSubmit, formState, setError, setValue} = useForm<FormData>({});
 

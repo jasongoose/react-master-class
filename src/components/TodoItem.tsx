@@ -1,7 +1,7 @@
 import {MouseEventHandler} from "react";
 import {useSetAtom} from 'jotai';
 
-import {Category, TodoItemData, todosAtom} from "../atoms.ts";
+import {Category, TaskData as TodoItemData, todosAtom} from "../atoms.ts";
 
 type Props = {
   todoData: TodoItemData
