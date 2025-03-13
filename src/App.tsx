@@ -1,12 +1,12 @@
 import {BrowserRouter, Route, Routes} from "react-router";
 
-
+import {GlobalStyle} from "./components/styled-ui.tsx";
 import Coin from "./routes/Coin.tsx";
 import Coins from "./routes/Coins.tsx";
 import Price from "./routes/Price.tsx";
 import Chart from "./routes/Chart.tsx";
 import TodoList from './routes/TodoList.tsx';
-import {GlobalStyle} from "./components/styled-ui.tsx";
+import KanbanBoard from "./routes/KanbanBoard.tsx";
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
               <Route path="chart" element={<Chart/>}/>
             </Route>
             <Route path="/todo-list" element={<TodoList/>}/>
+            <Route path="/kanban" element={<KanbanBoard/>}></Route>
           </Routes>
         </BrowserRouter>
       </>
