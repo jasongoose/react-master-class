@@ -34,7 +34,6 @@ const KbLayout = styled.div`
 const KbColumn = styled.fieldset`
   width: 200px;
   height: 400px;
-  outline: 1px solid red;
 `;
 
 function KanbanBoard() {
@@ -45,7 +44,7 @@ function KanbanBoard() {
     setTodos,
   } = useTodo();
 
-  const [nextTaskType, setNextTaskType] = useState<Category>();
+  const [nextTaskType, setNextTaskType] = useState<Category>(Category.TODO);
 
   const [taskInputValue, setTaskInputValue] = useState('');
 
@@ -64,7 +63,7 @@ function KanbanBoard() {
       const newTask = {
         text: taskInputValue,
         id: Date.now(),
-        category: Category.TODO
+        category: nextTaskType,
       } as TaskData;
       return [...prev, newTask];
     });

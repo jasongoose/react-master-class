@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {PropsWithChildren} from "react";
 import {useDrop} from "react-dnd";
 import {Category, TaskData} from "../atoms.ts";
+import {useTodo} from "../hooks/useTodo.tsx";
 
 type Props = {
   type: Category;
@@ -18,16 +19,20 @@ const KbDropAreaLayout = styled.ul`
 `;
 
 function KbDropArea({children, type}: PropsWithChildren<Props>) {
+  const {setTodos} = useTodo();
+
   const [collectedProps, drop] = useDrop(() => ({
-    accept: [Category.TODO, Category.DOING, Category.DONE].filter((cateory) => cateory !== type),
-    // collect: (monitor) => ({}),
+    accept: Object.keys(Category).filter((cateory) => cateory !== type),
     drop(item: TaskData) {
-      console.log(`item ${item['id']} dropped in ${type} area`);
+      setTodos((prev) => {
+        return prev.reduce((acc, curr) => {
+          acc.push(curr['id'] === item['id'] ? {...curr, category: type} : curr);
+          return acc;
+        }, [] as TaskData[]);
+      })
     },
-    hover(item: TaskData) {
-      console.log(`item ${item['id']} is hovering on ${type} area`);
-    }
   }));
+
   return (
       <KbDropAreaLayout ref={(node) => {
         drop(node)
