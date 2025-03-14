@@ -1,8 +1,6 @@
-import {MouseEventHandler} from "react";
-import {useSetAtom} from 'jotai';
-
-import {Category, TaskData, todosAtom} from "../atoms.ts";
+import {TaskData} from "../atoms.ts";
 import styled from "styled-components";
+import {useDrag} from "react-dnd";
 
 type Props = {
   taskData: TaskData
@@ -11,36 +9,25 @@ type Props = {
 const KbCardLayout = styled.li`
   width: 100%;
   height: 10%;
-  background-color: blue;`;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 function KbCard({taskData}: Props) {
-  const setTodos = useSetAtom((todosAtom));
-
-  const handleTodoButtonClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-    const category = event.currentTarget.name as TaskData['category'];
-
-    setTodos((prev) => {
-      const newTodo = {...taskData, category} as TaskData;
-
-      return prev.reduce((acc, curr) => {
-        acc.push(curr['id'] === taskData['id'] ? newTodo : curr);
-        return acc;
-      }, [] as TaskData[]);
+  const [collectedProps, drag] = useDrag(() => ({
+    type: taskData['category'],
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
     })
-  }
+  }));
 
   return (
-      <KbCardLayout>
+      <KbCardLayout ref={(node) => {
+        drag(node)
+      }}>
         <span>{taskData['text']}</span>
-
-        {taskData['category'] !== Category.DOING ?
-            <button name="DOING" onClick={handleTodoButtonClick}>Doing</button> : null}
-
-        {taskData['category'] !== Category.TODO ?
-            <button name="TODO" onClick={handleTodoButtonClick}>To Do</button> : null}
-
-        {taskData['category'] !== Category.DONE ?
-            <button name="DONE" onClick={handleTodoButtonClick}>Done</button> : null}
       </KbCardLayout>
   );
 }
