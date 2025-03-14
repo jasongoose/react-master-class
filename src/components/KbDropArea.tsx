@@ -22,8 +22,15 @@ function KbDropArea({children, type}: PropsWithChildren<Props>) {
   const {setTodos} = useTodo();
 
   const [collectedProps, drop] = useDrop(() => ({
-    accept: Object.keys(Category).filter((cateory) => cateory !== type),
+    accept: Object.keys(Category),
     drop(item: TaskData) {
+      if (item['category'] === type) {
+        setTodos((prev) => {
+          return prev.filter((task) => task['id'] !== item['id']).concat({...item, category: type})
+        });
+        return;
+      }
+      
       setTodos((prev) => {
         return prev.reduce((acc, curr) => {
           acc.push(curr['id'] === item['id'] ? {...curr, category: type} : curr);
