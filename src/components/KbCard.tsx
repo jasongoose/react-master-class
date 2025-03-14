@@ -18,6 +18,7 @@ const KbCardLayout = styled.li`
 function KbCard({taskData}: Props) {
   const [collectedProps, drag] = useDrag(() => ({
     type: taskData['category'],
+    item: taskData,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     })

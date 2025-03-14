@@ -3,6 +3,7 @@ import {ChangeEventHandler, useState} from "react";
 
 import {useTodo} from "../hooks/useTodo.tsx";
 import KbCard from "../components/KbCard.tsx";
+import KbDropArea from "../components/KbDropArea.tsx";
 import {Category, TaskData} from "../atoms.ts";
 
 const PageContainer = styled.div`
@@ -34,16 +35,6 @@ const KbColumn = styled.fieldset`
   width: 200px;
   height: 400px;
   outline: 1px solid red;
-`;
-
-const KbDropArea = styled.ul`
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  background-color: tomato;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 `;
 
 function KanbanBoard() {
@@ -98,7 +89,7 @@ function KanbanBoard() {
             <legend>
               <h1>Todo</h1>
             </legend>
-            <KbDropArea>
+            <KbDropArea type={Category.TODO}>
               {todoList.map((taskData) => <KbCard key={taskData['id']} taskData={taskData}/>)}
             </KbDropArea>
           </KbColumn>
@@ -106,7 +97,7 @@ function KanbanBoard() {
             <legend>
               <h1>Doing</h1>
             </legend>
-            <KbDropArea>
+            <KbDropArea type={Category.DOING}>
               {doingList.map((taskData) => <KbCard key={taskData['id']} taskData={taskData}/>)}
             </KbDropArea>
           </KbColumn>
@@ -114,7 +105,7 @@ function KanbanBoard() {
             <legend>
               <h1>Done</h1>
             </legend>
-            <KbDropArea>
+            <KbDropArea type={Category.DONE}>
               {doneList.map((taskData) => <KbCard key={taskData['id']} taskData={taskData}/>)}
             </KbDropArea>
           </KbColumn>
