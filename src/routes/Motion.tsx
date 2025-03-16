@@ -13,15 +13,20 @@ const Wrapper = styled.div`
 const Box = styled(motion.div)`
   width: 200px;
   height: 200px;
+  border-radius: 40px;
   background-color: white;
-  border-radius: 15px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
+
+const boxVariants = {
+  hover: {scale: 1.5, rotateZ: 90},
+  click: {borderRadius: "100px"},
+}
 
 function Motion() {
   return (
       <Wrapper>
-        <Box initial={{scale: 0}} animate={{scale: 1, rotateZ: 360}} transition={{type: "spring", damping: 100}}/>
+        <Box variants={boxVariants} whileHover="hover" whileTap="click"></Box>
       </Wrapper>
   )
 }
