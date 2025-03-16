@@ -7,6 +7,7 @@ import Price from "./routes/Price.tsx";
 import Chart from "./routes/Chart.tsx";
 import TodoList from './routes/TodoList.tsx';
 import KanbanBoard from "./routes/KanbanBoard.tsx";
+import Motion from "./routes/Motion.tsx";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             </Route>
             <Route path="/todo-list" element={<TodoList/>}/>
             <Route path="/kanban" element={<KanbanBoard/>}></Route>
+            <Route path="/motion" element={<Motion/>}></Route>
           </Routes>
         </BrowserRouter>
       </>
