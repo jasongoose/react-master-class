@@ -1,6 +1,10 @@
 import styled from "styled-components";
-import {AnimatePresence, motion} from "motion/react"
+import {motion} from "motion/react"
 import {useState} from "react";
+
+type BoxProps = {
+  $clicked: boolean;
+}
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -8,12 +12,25 @@ const Wrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
 `;
 
-const Box = styled(motion.div)`
-  width: 200px;
-  height: 200px;
+const Box = styled(motion.div)<BoxProps>`
+  width: 400px;
+  height: 400px;
+  border-radius: 40px;
+  background-color: white;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: ${(props) => props.$clicked ? "center" : 'flex-start'};
+  align-items: ${(props) => props.$clicked ? "center" : 'flex-start'};
+  font-size: 28px;
+`;
+
+const SharedLayoutBox = styled(motion.div)`
+  width: 400px;
+  height: 400px;
   border-radius: 40px;
   background-color: white;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
@@ -21,61 +38,35 @@ const Box = styled(motion.div)`
   justify-content: center;
   align-items: center;
   font-size: 28px;
-  position: absolute;
-  top: 100px;
 `;
 
-const sampleArr = Array.from({length: 10}, (_, index) => index);
+const Circle = styled(motion.div)`
+  background-color: #00a5ff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`
 
 function Motion() {
-  const [visibleIndex, setVisibleIndex] = useState(0);
-  const [back, setBack] = useState(false)
+  const [clicked, setClicked] = useState(false);
 
-  const nextPlease = () => {
-    setVisibleIndex((visibleIndex + 1) % sampleArr.length);
-    setBack(false);
-  }
-
-  const prevPlease = () => {
-    setVisibleIndex(visibleIndex === 0 ? sampleArr.length - 1 : visibleIndex - 1);
-    setBack(true);
-  }
-
-  const boxVariants = {
-    entry: (back: boolean) => ({
-      x: back ? -500 : 500,
-      opacity: 0,
-      scale: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1,
-      }
-    },
-    exit: (back: boolean) => ({
-      x: back ? 500 : -500,
-      opacity: 0,
-      scale: 0,
-      transition: {
-        duration: 1,
-      }
-    }),
+  const toggleClicked = () => {
+    setClicked(!clicked);
   }
 
   return (
-      <>
-        <Wrapper>
-          <AnimatePresence custom={back} mode="wait">
-            <Box key={visibleIndex} variants={boxVariants} initial="entry" animate="center"
-                 exit="exit" custom={back}>{visibleIndex}</Box>
-          </AnimatePresence>
-        </Wrapper>
-        <button onClick={nextPlease}>Next</button>
-        <button onClick={prevPlease}>Previous</button>
-      </>
+      <Wrapper onClick={toggleClicked}>
+        {/*<Box $clicked={clicked}>*/}
+        {/*  <Circle layout></Circle>*/}
+        {/*</Box>*/}
+        <SharedLayoutBox>
+          {clicked ? null : <Circle layoutId="circle" style={{borderRadius: "50%"}}></Circle>}
+        </SharedLayoutBox>
+        <SharedLayoutBox>
+          {clicked ? <Circle layoutId="circle" style={{borderRadius: 0, scale: 2}}></Circle> : null}
+        </SharedLayoutBox>
+      </Wrapper>
   )
 }
 
