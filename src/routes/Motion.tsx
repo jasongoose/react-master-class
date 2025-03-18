@@ -17,41 +17,65 @@ const Box = styled(motion.div)`
   border-radius: 40px;
   background-color: white;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  position: absolute;
+  top: 100px;
 `;
 
+const sampleArr = Array.from({length: 10}, (_, index) => index);
+
 function Motion() {
+  const [visibleIndex, setVisibleIndex] = useState(0);
+  const [back, setBack] = useState(false)
 
-  const [showBox, setShowBox] = useState(false);
+  const nextPlease = () => {
+    setVisibleIndex((visibleIndex + 1) % sampleArr.length);
+    setBack(false);
+  }
 
-  const toggleShowBox = () => {
-    setShowBox(!showBox);
+  const prevPlease = () => {
+    setVisibleIndex(visibleIndex === 0 ? sampleArr.length - 1 : visibleIndex - 1);
+    setBack(true);
   }
 
   const boxVariants = {
-    initial: {
+    entry: (back: boolean) => ({
+      x: back ? -500 : 500,
       opacity: 0,
       scale: 0,
-    },
-    visible: {
+    }),
+    center: {
+      x: 0,
       opacity: 1,
       scale: 1,
-      rotateZ: 360,
+      transition: {
+        duration: 1,
+      }
     },
-    leaving: {
+    exit: (back: boolean) => ({
+      x: back ? 500 : -500,
       opacity: 0,
       scale: 0,
-      y: 50,
-    }
+      transition: {
+        duration: 1,
+      }
+    }),
   }
 
-
   return (
-      <Wrapper>
-        <button onClick={toggleShowBox}>Click</button>
-        <AnimatePresence>
-          {showBox ? <Box variants={boxVariants} initial="initial" animate="visible" exit="leaving"></Box> : null}
-        </AnimatePresence>
-      </Wrapper>
+      <>
+        <Wrapper>
+          <AnimatePresence custom={back} mode="wait">
+            <Box key={visibleIndex} variants={boxVariants} initial="entry" animate="center"
+                 exit="exit" custom={back}>{visibleIndex}</Box>
+          </AnimatePresence>
+        </Wrapper>
+        <button onClick={nextPlease}>Next</button>
+        <button onClick={prevPlease}>Previous</button>
+      </>
   )
 }
 
