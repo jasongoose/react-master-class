@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import {mockData} from "../constants/mock-data.ts";
+import {getTargetBook} from "../utils";
 
 type Params = {
   authorId: string;
@@ -8,13 +8,8 @@ type Params = {
 
 function Chapters() {
   const {authorId = '', bookId = ''} = useParams<Params>();
-  const targetAuthor = mockData.find(el => el['id'] === authorId);
 
-  if (!targetAuthor) {
-    return null;
-  }
-
-  const targetBook = targetAuthor['books'].find(book => book['id'] === bookId);
+  const targetBook = getTargetBook(authorId, bookId);
 
   if (!targetBook) {
     return null;

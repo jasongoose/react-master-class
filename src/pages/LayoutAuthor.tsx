@@ -1,6 +1,5 @@
 import {Link, Outlet, useParams} from "react-router";
-
-import {mockData} from "../constants/mock-data.ts";
+import {getTargetAuthor} from "../utils";
 
 type Params = {
   authorId: string;
@@ -8,7 +7,7 @@ type Params = {
 
 function LayoutAuthor() {
   const {authorId = ''} = useParams<Params>();
-  const targetAuthor = mockData.find(el => el['id'] === authorId);
+  const targetAuthor = getTargetAuthor(authorId);
 
   if (!targetAuthor) {
     return null;

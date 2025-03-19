@@ -1,5 +1,5 @@
 import {Link, Outlet, useParams} from "react-router";
-import {mockData} from "../constants/mock-data.ts";
+import {getTargetBook} from "../utils";
 
 type Params = {
   authorId: string;
@@ -8,13 +8,8 @@ type Params = {
 
 function LayoutAuthorBook() {
   const {authorId = '', bookId = ''} = useParams<Params>();
-  const targetAuthor = mockData.find(el => el['id'] === authorId);
 
-  if (!targetAuthor) {
-    return null;
-  }
-
-  const targetBook = targetAuthor['books'].find(book => book['id'] === bookId);
+  const targetBook = getTargetBook(authorId, bookId);
 
   if (!targetBook) {
     return null;
@@ -35,6 +30,7 @@ function LayoutAuthorBook() {
             </Link>
           </li>
         </ul>
+        <hr/>
         <Outlet></Outlet>
       </div>
   );
