@@ -16,8 +16,8 @@ function App() {
           <Route element={<LayoutGlobal/>}>
             <Route index element={<Home/>}></Route>
             <Route path="about" element={<About/>}></Route>
-            <Route path="author/:name" element={<Author/>}>
-              <Route path=":book" element={<LayoutAuthorBook/>}>
+            <Route path="author/:authorId" element={<Author/>}>
+              <Route path=":bookId" element={<LayoutAuthorBook/>}>
                 <Route path="chapters" element={<Chapters/>}></Route>
                 <Route path="characters" element={<Characters/>}></Route>
               </Route>
