@@ -52,12 +52,6 @@ export const mockData: MockData = [
           'Bad Guy B',
         ],
       },
-      {
-        id: "Harry_Potter_III",
-        name: "Harry Potter III",
-        chapters: [],
-        characters: [],
-      }
     ],
   },
   {
