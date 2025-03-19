@@ -1,4 +1,5 @@
 import styled, {createGlobalStyle} from "styled-components";
+import {motion} from "motion/react";
 
 export const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -167,4 +168,26 @@ export const Tab = styled.div<{ $isActive: boolean }>`
   border-radius: 10px;
   color: ${(props) =>
           props.$isActive ? props.theme.accentColor : props.theme.textColor};
+`;
+
+export const MotionWrapper = styled(motion.div)`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
+`;
+
+export const MotionBox = styled(motion.div)`
+  width: 300px;
+  height: 300px;
+  border-radius: 40px;
+  background-color: white;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
 `;

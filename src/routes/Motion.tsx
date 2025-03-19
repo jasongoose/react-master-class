@@ -2,43 +2,18 @@ import styled from "styled-components";
 import {motion} from "motion/react"
 import {useState} from "react";
 
+import {MotionBox, MotionWrapper} from "../components/styled-ui.tsx";
+
 type BoxProps = {
   $clicked: boolean;
 }
 
-const Wrapper = styled(motion.div)`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
-`;
-
-const Box = styled(motion.div)<BoxProps>`
-  width: 400px;
-  height: 400px;
-  border-radius: 40px;
-  background-color: white;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-  display: flex;
+const Box = styled(MotionBox)<BoxProps>`
   justify-content: ${(props) => props.$clicked ? "center" : 'flex-start'};
   align-items: ${(props) => props.$clicked ? "center" : 'flex-start'};
-  font-size: 28px;
 `;
 
-const SharedLayoutBox = styled(motion.div)`
-  width: 400px;
-  height: 400px;
-  border-radius: 40px;
-  background-color: white;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-`;
+const SharedLayoutBox = styled(MotionBox)``;
 
 const Circle = styled(motion.div)`
   background-color: #00a5ff;
@@ -56,7 +31,7 @@ function Motion() {
   }
 
   return (
-      <Wrapper onClick={toggleClicked}>
+      <MotionWrapper onClick={toggleClicked}>
         {/*<Box $clicked={clicked}>*/}
         {/*  <Circle layout></Circle>*/}
         {/*</Box>*/}
@@ -66,7 +41,7 @@ function Motion() {
         <SharedLayoutBox>
           {clicked ? <Circle layoutId="circle" style={{borderRadius: 0, scale: 2}}></Circle> : null}
         </SharedLayoutBox>
-      </Wrapper>
+      </MotionWrapper>
   )
 }
 

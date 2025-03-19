@@ -8,6 +8,7 @@ import Chart from "./routes/Chart.tsx";
 import TodoList from './routes/TodoList.tsx';
 import KanbanBoard from "./routes/KanbanBoard.tsx";
 import Motion from "./routes/Motion.tsx";
+import MotionFinal from "./routes/MotionFinal.tsx";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/todo-list" element={<TodoList/>}/>
             <Route path="/kanban" element={<KanbanBoard/>}></Route>
             <Route path="/motion" element={<Motion/>}></Route>
+            <Route path="/motion-final" element={<MotionFinal/>}></Route>
           </Routes>
         </BrowserRouter>
       </>
