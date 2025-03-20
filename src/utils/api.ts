@@ -16,6 +16,6 @@ export const fetchDisneyCharacters = async (): Promise<DisneyCharacter[]> => {
   return fetch('https://disney_api.nomadcoders.workers.dev/characters').then(res => res.json());
 }
 
-export const fetchCharacterDetails = async (id: number | string): Promise<CharacterDetail> => {
+export const fetchCharacterDetail = async (id: number | string): Promise<CharacterDetail> => {
   return fetch(`https://disney_api.nomadcoders.workers.dev/characters/${id}`).then(res => res.json());
 }
