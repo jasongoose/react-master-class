@@ -70,6 +70,8 @@ const GlobalStyle = createGlobalStyle`
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
+    background-color: ${(props) => props.theme.bgColor};
+    color: ${(props) => props.theme.textColor};
   }
 
   a {
