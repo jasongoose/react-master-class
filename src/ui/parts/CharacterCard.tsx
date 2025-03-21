@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {DisneyCharacter} from "../utils/api.ts";
-import {useLazyImage} from "../hooks/useLazyImage.tsx";
+import {DisneyCharacter} from "../../utils/api.ts";
+import {useLazyImage} from "../../hooks/useLazyImage.tsx";
 
 type CharacterCardProps = {
   character: DisneyCharacter;

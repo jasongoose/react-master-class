@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {Suspense} from "react";
 import {useParams} from "react-router";
 import CharacterInfo from "../ui/CharacterInfo.tsx";
-import Loader from "../ui/Loader.tsx";
+import Loader from "../ui/parts/Loader.tsx";
 
 type Params = {
   id: string;
