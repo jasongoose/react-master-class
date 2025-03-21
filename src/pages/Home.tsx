@@ -6,6 +6,7 @@ import CharacterList from "../ui/CharacterList.tsx";
 const LayoutHome = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `
 
 function Home() {
