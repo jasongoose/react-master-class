@@ -6,9 +6,9 @@ import {LargeTitle} from "./styled/LargeTitle.tsx";
 import * as Chip from './styled/Chip.tsx';
 import * as CircleImage from './styled/CircleImage.tsx'
 import {SizedSpace} from "./styled/SizedSpace.tsx";
-import IconLocationDot from "./parts/IconLocationDot.tsx";
+import IconLocationDot from "./parts/icon/IconLocationDot.tsx";
 import ExpandableButton from "./parts/ExpandableButton.tsx";
-import IconLeftArrow from "./parts/IconLeftArrow.tsx";
+import IconLeftArrow from "./parts/icon/IconLeftArrow.tsx";
 
 
 type Props = {

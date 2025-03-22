@@ -9,8 +9,8 @@ function App() {
         <GlobalStyle/>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home/>}></Route>
-            <Route path="/character/:id" element={<Detail/>}></Route>
+            <Route path="/" element={<Home/>}/>
+            <Route path="character/:id" element={<Detail/>}/>
           </Routes>
         </BrowserRouter>
       </>
