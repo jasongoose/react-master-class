@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useState} from "react";
 import {DisneyCharacter} from "../../utils/api.ts";
-import * as Overlay from "./Overlay.tsx";
+import * as Overlay from "../styled/Overlay.tsx";
 
 type CharacterCardProps = {
   character: DisneyCharacter;

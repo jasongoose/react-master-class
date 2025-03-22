@@ -1,9 +1,9 @@
 import {useSuspenseQuery} from "@tanstack/react-query";
 import styled from "styled-components";
 import {fetchCharacterDetail} from "../utils/api.ts";
-import {LargeTitle} from "./parts/LargeTitle.tsx";
-import * as Chip from './parts/Chip.tsx';
-import * as CircleImage from './parts/CircleImage.tsx'
+import {LargeTitle} from "./styled/LargeTitle.tsx";
+import * as Chip from './styled/Chip.tsx';
+import * as CircleImage from './styled/CircleImage.tsx'
 
 type Props = {
   id: number | string;
