@@ -1,14 +1,14 @@
 import {useSuspenseQuery} from "@tanstack/react-query";
 import styled from "styled-components";
 import {Link} from "react-router";
-import {fetchCharacterDetail} from "../utils/api.ts";
-import {LargeTitle} from "./styled/LargeTitle.tsx";
-import * as Chip from './styled/Chip.tsx';
-import * as CircleImage from './styled/CircleImage.tsx'
-import {SizedSpace} from "./styled/SizedSpace.tsx";
-import IconLocationDot from "./parts/icon/IconLocationDot.tsx";
-import ExpandableButton from "./parts/ExpandableButton.tsx";
-import IconLeftArrow from "./parts/icon/IconLeftArrow.tsx";
+import {fetchCharacterDetail} from "../../utils/api.ts";
+import {LargeTitle} from "../pieces/LargeTitle.tsx";
+import * as Chip from '../pieces/Chip.tsx';
+import * as CircleImage from '../pieces/CircleImage.tsx'
+import {SizedSpace} from "../pieces/SizedSpace.tsx";
+import IconLocationDot from "../parts/icon/IconLocationDot.tsx";
+import ExpandableButton from "../parts/ExpandableButton.tsx";
+import IconLeftArrow from "../parts/icon/IconLeftArrow.tsx";
 
 
 type Props = {

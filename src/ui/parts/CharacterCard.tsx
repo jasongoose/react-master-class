@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useState} from "react";
 import {DisneyCharacter} from "../../utils/api.ts";
-import * as Overlay from "../styled/Overlay.tsx";
+import {Dimmed as OverlayDimmed} from "../pieces/Dimmed.tsx";
 
 type CharacterCardProps = {
   character: DisneyCharacter;
@@ -23,12 +23,12 @@ const Card = styled.li`
   cursor: pointer;
   break-inside: avoid;
 
-  ${Overlay.Dimmed} {
+  ${OverlayDimmed} {
     border-radius: 10px;
   }
 
   &:hover {
-    ${Overlay.Dimmed} {
+    ${OverlayDimmed} {
       opacity: 1;
     }
   }
@@ -43,6 +43,18 @@ const Image = styled.img.attrs({loading: 'lazy'})<ImageProps>`
   transition: opacity 0.3s ease-in-out;
 `;
 
+const OverlayTextContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const OverlayText = styled.span<{ fontSize: number }>`
+  color: white;
+  font-size: ${(props) => props.fontSize + 'px'};
+`
 
 function CharacterCard({character}: CharacterCardProps) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -55,11 +67,11 @@ function CharacterCard({character}: CharacterCardProps) {
       <Card>
         <Image src={character['imageUrl']} alt={character['name']} $isLoaded={isLoaded}
                onLoad={handleImageLoad}/>
-        <Overlay.Dimmed>
-          <Overlay.TextContainer>
-            <Overlay.Text fontSize={30}>{character['name']}</Overlay.Text>
-          </Overlay.TextContainer>
-        </Overlay.Dimmed>
+        <OverlayDimmed>
+          <OverlayTextContainer>
+            <OverlayText fontSize={30}>{character['name']}</OverlayText>
+          </OverlayTextContainer>
+        </OverlayDimmed>
       </Card>
   )
 }

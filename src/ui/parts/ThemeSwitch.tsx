@@ -1,6 +1,6 @@
 import {useAtom} from "jotai";
 import styled from "styled-components";
-import {themeIndexAtom} from "../../utils/atoms.ts";
+import {themeIndexAtom} from "../../atoms/theme.ts";
 import IconSunOutlined from "./icon/IconSunOutlined.tsx";
 import IconMoonFilled from "./icon/IconMoonFilled.tsx";
 

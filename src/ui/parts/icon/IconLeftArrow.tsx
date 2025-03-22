@@ -1,4 +1,4 @@
-import {CommonSvg} from "../../styled/CommonSvg.tsx";
+import {CommonSvg} from "../../pieces/CommonSvg.tsx";
 
 type Props = {
   size: number;

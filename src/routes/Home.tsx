@@ -1,7 +1,7 @@
 import {Suspense} from "react";
 import styled from "styled-components";
 import Loader from "../ui/parts/Loader.tsx";
-import CharacterList from "../ui/CharacterList.tsx";
+import CharacterList from "../ui/contents/CharacterList.tsx";
 
 const LayoutHome = styled.div`
   display: flex;

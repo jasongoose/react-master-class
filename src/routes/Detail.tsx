@@ -1,7 +1,7 @@
 import {Suspense} from "react";
 import {useParams} from "react-router";
 import styled from "styled-components";
-import CharacterInfo from "../ui/CharacterInfo.tsx";
+import CharacterInfo from "../ui/contents/CharacterInfo.tsx";
 import Loader from "../ui/parts/Loader.tsx";
 
 type Params = {

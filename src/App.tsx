@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router";
 import styled from "styled-components";
-import Home from "./pages/Home";
-import Detail from "./pages/Detail";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
 import GlobalStyle from "./utils/GlobalStyle.tsx";
 import ThemeSwitch from "./ui/parts/ThemeSwitch.tsx";
 

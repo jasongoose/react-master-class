@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {LargeTitle} from "../styled/LargeTitle.tsx";
+import {LargeTitle} from "../pieces/LargeTitle.tsx";
 
 const LoaderContainer = styled.div`
   display: flex;
