@@ -1,8 +1,8 @@
 import {useSuspenseQuery} from "@tanstack/react-query";
 import styled from "styled-components";
+import {Link} from "react-router";
 import {fetchDisneyCharacters} from "../utils/api.ts";
 import CharacterCard from "./parts/CharacterCard.tsx";
-import {Link} from "react-router";
 import {LargeTitle} from "./styled/LargeTitle.tsx";
 
 const CharacterListLayout = styled.ul`

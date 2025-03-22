@@ -1,9 +1,12 @@
 import {useSuspenseQuery} from "@tanstack/react-query";
 import styled from "styled-components";
+import {Link} from "react-router";
 import {fetchCharacterDetail} from "../utils/api.ts";
 import {LargeTitle} from "./styled/LargeTitle.tsx";
 import * as Chip from './styled/Chip.tsx';
 import * as CircleImage from './styled/CircleImage.tsx'
+import {SizedSpace} from "./styled/SizedSpace.tsx";
+import BackButton from './parts/BackButton.tsx';
 
 type Props = {
   id: number | string;
@@ -14,8 +17,7 @@ const CharacterInfoLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
+`;
 
 function CharacterInfo(props: Props) {
   const {data: characterInfoData} = useSuspenseQuery({
@@ -29,11 +31,16 @@ function CharacterInfo(props: Props) {
         <CircleImage.Container>
           <CircleImage.Image src={characterInfoData['imageUrl']} alt={characterInfoData['name']}/>
         </CircleImage.Container>
+        <SizedSpace size={30}/>
         <Chip.ChipGroup>
           {characterInfoData['films'].map((filmName) => (
               <Chip.ChipItem key={filmName}>{filmName}</Chip.ChipItem>
           ))}
         </Chip.ChipGroup>
+        <SizedSpace size={60}/>
+        <Link to="/">
+          <BackButton/>
+        </Link>
       </CharacterInfoLayout>
   )
 }
