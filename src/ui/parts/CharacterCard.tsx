@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {DisneyCharacter} from "../../utils/api.ts";
-import {useLazyImage} from "../../hooks/useLazyImage.tsx";
+import {useState} from "react";
 
 type CharacterCardProps = {
   character: DisneyCharacter;
@@ -14,6 +14,7 @@ const Card = styled.li`
   display: inline-block;
   width: 100%;
   margin-bottom: 10px;
+  min-width: 100px;
   min-height: 100px;
   background-color: #f0f0f0;
   border-radius: 10px;
@@ -30,15 +31,15 @@ const Image = styled.img.attrs({loading: 'lazy'})<ImageProps>`
 `;
 
 function CharacterCard({character}: CharacterCardProps) {
-  const {
-    imageRef,
-    isLoaded,
-    handleImageLoad,
-  } = useLazyImage('100px');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setIsLoaded(true);
+  }
 
   return (
       <Card>
-        <Image ref={imageRef} src={character['imageUrl']} alt={character['name']} $isLoaded={isLoaded}
+        <Image src={character['imageUrl']} alt={character['name']} $isLoaded={isLoaded}
                onLoad={handleImageLoad}/>
       </Card>
   )
