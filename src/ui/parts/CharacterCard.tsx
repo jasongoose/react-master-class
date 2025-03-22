@@ -36,11 +36,13 @@ const Card = styled.li`
 
 const Image = styled.img.attrs({loading: 'lazy'})<ImageProps>`
   width: 100%;
-  height: auto;
+  //height: auto;
+  min-height: 100px;
   display: block;
   border-radius: 10px;
   opacity: ${(props) => props.$isLoaded ? 1 : 0};
   transition: opacity 0.3s ease-in-out;
+  object-fit: cover;
 `;
 
 const OverlayTextContainer = styled.div`
