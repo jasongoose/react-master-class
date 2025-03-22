@@ -6,8 +6,9 @@ import {LargeTitle} from "./styled/LargeTitle.tsx";
 import * as Chip from './styled/Chip.tsx';
 import * as CircleImage from './styled/CircleImage.tsx'
 import {SizedSpace} from "./styled/SizedSpace.tsx";
+import IconLocationDot from "./parts/IconLocationDot.tsx";
 import ExpandableButton from "./parts/ExpandableButton.tsx";
-import LeftArrowIcon from "./parts/LeftArrowIcon.tsx";
+import IconLeftArrow from "./parts/IconLeftArrow.tsx";
 
 
 type Props = {
@@ -42,8 +43,13 @@ function CharacterInfo(props: Props) {
         <SizedSpace size={60}/>
         <Link to="/">
           <ExpandableButton fontSize={40} maxWidth={120} buttonText="Back to home"
-                            icon={<LeftArrowIcon size={40}/>}/>
+                            icon={<IconLeftArrow size={40}/>}/>
         </Link>
+        <SizedSpace size={30}/>
+        <a href={characterInfoData['sourceUrl']}>
+          <ExpandableButton fontSize={40} maxWidth={120} buttonText={"Go to source"}
+                            icon={<IconLocationDot size={40}/>}/>
+        </a>
       </CharacterInfoLayout>
   )
 }
