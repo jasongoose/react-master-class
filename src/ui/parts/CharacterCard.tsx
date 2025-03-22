@@ -23,6 +23,10 @@ const Card = styled.li`
   cursor: pointer;
   break-inside: avoid;
 
+  ${Overlay.Dimmed} {
+    border-radius: 10px;
+  }
+
   &:hover {
     ${Overlay.Dimmed} {
       opacity: 1;
