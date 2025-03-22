@@ -6,7 +6,9 @@ import {LargeTitle} from "./styled/LargeTitle.tsx";
 import * as Chip from './styled/Chip.tsx';
 import * as CircleImage from './styled/CircleImage.tsx'
 import {SizedSpace} from "./styled/SizedSpace.tsx";
-import BackButton from './parts/BackButton.tsx';
+import ExpandableButton from "./parts/ExpandableButton.tsx";
+import LeftArrowIcon from "./parts/LeftArrowIcon.tsx";
+
 
 type Props = {
   id: number | string;
@@ -39,7 +41,8 @@ function CharacterInfo(props: Props) {
         </Chip.ChipGroup>
         <SizedSpace size={60}/>
         <Link to="/">
-          <BackButton/>
+          <ExpandableButton fontSize={40} maxWidth={120} buttonText="Back to home"
+                            icon={<LeftArrowIcon size={40}/>}/>
         </Link>
       </CharacterInfoLayout>
   )
