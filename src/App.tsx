@@ -95,7 +95,9 @@ function App() {
           </ul>
         </fieldset>
         <fieldset>
-          <legend><h1>내가 좋아하는 나라들</h1></legend>
+          <legend>
+            <h1>내가 좋아하는 나라들</h1>
+          </legend>
           <ul>
             {favoriteList.map((bucket) => (
                 <li className={style['bucket-item']} key={bucket['id']}>

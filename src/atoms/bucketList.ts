@@ -1,4 +1,5 @@
 import {atom} from "jotai";
+import {atomWithStorage} from 'jotai/utils';
 
 export enum Category {
   "WANT",
@@ -12,12 +13,10 @@ export type Bucket = {
   category: Category;
 }
 
-export const bucketListAtom = atom<Bucket[]>([])
+export const bucketListAtom = atomWithStorage<Bucket[]>('bucketList', []);
 
 export const wantListAtom = atom<Bucket[]>((get) => get(bucketListAtom).filter((bucket) => bucket['category'] === Category.WANT));
 
 export const wentListAtom = atom<Bucket[]>((get) => get(bucketListAtom).filter((bucket) => bucket['category'] === Category.WENT));
 
 export const favoriteListAtom = atom<Bucket[]>((get) => get(bucketListAtom).filter((bucket) => bucket['category'] === Category.FAVORITE));
-
-// TODO:: localStorage 연동
