@@ -1,4 +1,19 @@
+.container {
+  width: 60%;
+}
+
 .form-layout {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.error-text {
+  color: red;
+}
+
+.bucket-item {
+  display: flex;
   align-items: center;
+  gap: 5px;
 }
