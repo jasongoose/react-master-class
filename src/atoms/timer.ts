@@ -1,6 +1,7 @@
 import {atomWithReducer} from "jotai/utils";
+import {MINUTES_TO_SECONDS} from "../utils/math.ts";
 
-enum Action {
+export enum Action {
   START,
   PAUSE,
   RESET,
@@ -13,8 +14,6 @@ type Timer = {
 }
 
 type ActionType = { type: Action };
-
-const MINUTES_TO_SECONDS = 60;
 
 const TWENTY_FIVE_MINUTES_TO_SECONDS = 25 * MINUTES_TO_SECONDS;
 
