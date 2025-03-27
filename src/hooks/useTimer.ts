@@ -8,7 +8,7 @@ export const useTimer = () => {
   useEffect(() => {
     let timeoutId: number;
 
-    if (timer['isRunning'] && timer['time'] > 0) {
+    if (timer['isRunning'] && timer['time'] >= 0) {
       timeoutId = setTimeout(() => {
         dispatch({type: Action.TICK});
       }, 1_000);

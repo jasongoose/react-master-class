@@ -31,7 +31,8 @@ const timerControlReducer = (curr: Timer, action?: ActionType) => {
     case Action.RESET:
       return generateInitialTimer();
     case Action.TICK:
-      return ({...curr, time: Math.max(curr['time'] - 1, 0)});
+      // 잔여 시간이 없는 경우, reset
+      return curr['time'] === 0 ? generateInitialTimer() : ({...curr, time: curr['time'] - 1});
     default:
       return curr;
   }
