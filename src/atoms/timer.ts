@@ -1,41 +1,36 @@
-import {atomWithReducer} from "jotai/utils";
 import {MINUTES_TO_SECONDS} from "../utils/math.ts";
+import {atom} from "jotai";
 
-export enum Action {
+export enum TimerAction {
   START,
   PAUSE,
   RESET,
   TICK,
 }
 
-type Timer = {
-  time: number;
-  isRunning: boolean;
-}
+export type TimerActionType = { type: TimerAction };
 
-type ActionType = { type: Action };
+type Timer = {
+  timeLeft: number;
+  isRunning: boolean;
+};
 
 const TWENTY_FIVE_MINUTES_TO_SECONDS = 25 * MINUTES_TO_SECONDS;
 
-const generateInitialTimer = (): Timer => ({
-  time: TWENTY_FIVE_MINUTES_TO_SECONDS,
+export const generateInitialTimer = (): Timer => ({
+  timeLeft: TWENTY_FIVE_MINUTES_TO_SECONDS,
   isRunning: false,
-})
+});
 
-const timerControlReducer = (curr: Timer, action?: ActionType) => {
-  switch (action?.['type']) {
-    case Action.START:
-      return ({...curr, isRunning: true});
-    case Action.PAUSE:
-      return ({...curr, isRunning: false});
-    case Action.RESET:
-      return generateInitialTimer();
-    case Action.TICK:
-      // 잔여 시간이 없는 경우, reset
-      return curr['time'] === 0 ? generateInitialTimer() : ({...curr, time: curr['time'] - 1});
-    default:
-      return curr;
-  }
-};
+export const timerAtom = atom(generateInitialTimer());
 
-export const timerControlAtom = atomWithReducer<Timer, ActionType>(generateInitialTimer(), timerControlReducer);
+export const timeLeftAtom = atom(
+    (get) => {
+      return get(timerAtom)['timeLeft'];
+    },
+    (get, set, newValue: number) => {
+      set(timerAtom, {...get(timerAtom), timeLeft: newValue});
+    }
+);
+
+export const isTimerRunningAtom = atom((get) => get(timerAtom)['isRunning']);

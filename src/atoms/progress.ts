@@ -7,13 +7,13 @@ export enum ProgressAction {
   ADD_GOAL_COUNT,
 }
 
-type ProgressActionType = {
+export type ProgressActionType = {
   type: ProgressAction;
 }
 
 const MAXIMUM_ROUND_COUNT = 4;
 
-const MAXIMUM_GOAL_COUNT = 10;
+const MAXIMUM_GOAL_COUNT = 12;
 
 const roundCounterAtom = atom(0);
 
@@ -21,7 +21,10 @@ const goalCounterAtom = atom(0);
 
 export const progressAtom = atom(
     (get) => {
-      return [get(roundCounterAtom), get(goalCounterAtom)];
+      return {
+        roundCount: get(roundCounterAtom),
+        goalCount: get(goalCounterAtom),
+      }
     },
     (get, set, action: ProgressActionType) => {
       switch (action['type']) {
@@ -29,7 +32,7 @@ export const progressAtom = atom(
           set(roundCounterAtom, 0);
           break;
         case ProgressAction.ADD_ROUND_COUNT:
-          if (get(roundCounterAtom) === MAXIMUM_ROUND_COUNT) {
+          if (get(roundCounterAtom) === MAXIMUM_ROUND_COUNT - 1) {
             set(goalCounterAtom, get(goalCounterAtom) + 1);
             set(roundCounterAtom, 0);
           } else {
@@ -40,8 +43,9 @@ export const progressAtom = atom(
           set(goalCounterAtom, 0);
           break;
         case ProgressAction.ADD_GOAL_COUNT:
-          if (get(goalCounterAtom) === MAXIMUM_GOAL_COUNT) {
+          if (get(goalCounterAtom) === MAXIMUM_GOAL_COUNT - 1) {
             set(goalCounterAtom, 0);
+            set(roundCounterAtom, 0);
           } else {
             set(goalCounterAtom, get(goalCounterAtom) + 1);
           }
@@ -49,3 +53,11 @@ export const progressAtom = atom(
       }
     }
 );
+
+export const roundStatusAtom = atom((get) => {
+  return `${get(progressAtom)['roundCount']} / ${MAXIMUM_ROUND_COUNT}`;
+});
+
+export const goalStatusAtom = atom((get) => {
+  return `${get(progressAtom)['goalCount']} / ${MAXIMUM_GOAL_COUNT}`;
+});
