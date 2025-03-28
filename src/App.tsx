@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {useAtomValue, useSetAtom} from "jotai";
 import {useEffect} from "react";
+import {AnimatePresence} from "motion/react";
 import {appAtom} from "./atoms/app.ts";
 import {isTimerRunningAtom, timeLeftAtom, TimerAction} from "./atoms/timer.ts";
 import {goalStatusAtom, roundStatusAtom} from "./atoms/progress.ts";
@@ -22,7 +23,7 @@ const Title = styled.h1`
   width: 100%;
   font-size: 100px;
   text-align: center;
-  padding: 10px 0;
+  padding-top: 40px;
 `;
 
 const ContentsLayout = styled.div`
@@ -102,33 +103,30 @@ function App() {
   return (
       <AppLayout>
         <Title>Pomodoro</Title>
+        <VerticalSizedBox $size={50} $unit={'px'}/>
         <ContentsLayout>
-          <DigitsLayout>
-            {/*<AnimatePresence initial={false}>*/}
-            {/*  <SingleDigitCard key={minutesDecimalDigits[0]}>{minutesDecimalDigits[0]}</SingleDigitCard>*/}
-            {/*  <SingleDigitCard key={minutesDecimalDigits[1]}>{minutesDecimalDigits[1]}</SingleDigitCard>*/}
-            {/*  <SingleDigitCard>:</SingleDigitCard>*/}
-            {/*  <SingleDigitCard key={secondsLeftDecimalDigits[0]}>{secondsLeftDecimalDigits[0]}</SingleDigitCard>*/}
-            {/*  <SingleDigitCard key={secondsLeftDecimalDigits[1]}>{secondsLeftDecimalDigits[1]}</SingleDigitCard>*/}
-            {/*</AnimatePresence>*/}
-            <SingleDigitCard>{minutesDecimalDigits[0]}</SingleDigitCard>
-            <SingleDigitCard>{minutesDecimalDigits[1]}</SingleDigitCard>
-            <SingleDigitCard>:</SingleDigitCard>
-            <SingleDigitCard>{secondsLeftDecimalDigits[0]}</SingleDigitCard>
-            <SingleDigitCard>{secondsLeftDecimalDigits[1]}</SingleDigitCard>
-          </DigitsLayout>
+          <AnimatePresence initial={false}>
+            <DigitsLayout>
+              <SingleDigitCard key={minutesDecimalDigits[0] + '_0'}>{minutesDecimalDigits[0]}</SingleDigitCard>
+              <SingleDigitCard key={minutesDecimalDigits[1] + '_1'}>{minutesDecimalDigits[1]}</SingleDigitCard>
+              <SingleDigitCard>:</SingleDigitCard>
+              <SingleDigitCard key={secondsLeftDecimalDigits[0] + '_2'}>{secondsLeftDecimalDigits[0]}</SingleDigitCard>
+              <SingleDigitCard key={secondsLeftDecimalDigits[1] + '_3'}>{secondsLeftDecimalDigits[1]}</SingleDigitCard>
+            </DigitsLayout>
+          </AnimatePresence>
+          <VerticalSizedBox $size={30} $unit={'px'}/>
           <ToggleSlider
               isOn={!isTimerRunning}
               onText="Pause"
               offText="Start"
               handleToggleChipClick={handleToggleChipClick}
           />
-          <VerticalSizedBox $size={100} $unit={'px'}/>
+          <VerticalSizedBox $size={50} $unit={'px'}/>
           <ProgressLayout>
             <ProgressTitle>Round</ProgressTitle>
             <Battery currentGauge={currentRound} totalGauge={totalRounds}/>
           </ProgressLayout>
-          <VerticalSizedBox $size={30} $unit={'px'}/>
+          <VerticalSizedBox $size={50} $unit={'px'}/>
           <ProgressLayout>
             <ProgressTitle>Goal</ProgressTitle>
             <Battery currentGauge={currentGoal} totalGauge={totalGoals}/>
