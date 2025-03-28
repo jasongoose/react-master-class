@@ -17,13 +17,13 @@ const AppLayout = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  padding: 20px 0;
 `;
 
 const Title = styled.h1`
   width: 100%;
   font-size: 100px;
   text-align: center;
-  padding-top: 40px;
 `;
 
 const ContentsLayout = styled.div`
@@ -123,12 +123,16 @@ function App() {
           />
           <VerticalSizedBox $size={100} $unit={'px'}/>
           <ProgressLayout>
-            <ProgressTitle>Round</ProgressTitle>
+            <ProgressTitle>
+              <span>{`Round (${currentRound} / ${totalRounds})`}</span>
+            </ProgressTitle>
             <Battery currentGauge={currentRound} totalGauge={totalRounds}/>
           </ProgressLayout>
           <VerticalSizedBox $size={30} $unit={'px'}/>
           <ProgressLayout>
-            <ProgressTitle>Goal</ProgressTitle>
+            <ProgressTitle>
+              <span>{`Goal (${currentGoal} / ${totalGoals})`}</span>
+            </ProgressTitle>
             <Battery currentGauge={currentGoal} totalGauge={totalGoals}/>
           </ProgressLayout>
           <VerticalSizedBox $size={150} $unit={'px'}/>
