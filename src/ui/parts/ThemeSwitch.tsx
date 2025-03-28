@@ -4,7 +4,6 @@ import {themeIndexAtom} from "../../atoms/theme.ts";
 import IconSunOutlined from "../pieces/icon/IconSunOutlined.tsx";
 import IconMoonFilled from "../pieces/icon/IconMoonFilled.tsx";
 
-
 const ThemeSwitchContainer = styled.div<{ $size: number }>`
   width: ${(props) => props.$size + 'px'};
   height: ${(props) => props.$size + 'px'};

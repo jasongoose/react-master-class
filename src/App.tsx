@@ -9,7 +9,7 @@ import {calcDecimalDigits, calcMinutesFromSeconds, calcSecondsLeft} from "./util
 import SingleDigitCard from "./ui/pieces/SingleDigitCard.tsx";
 import ToggleSlider from "./ui/parts/ToggleSlider.tsx";
 import {VerticalSizedBox} from "./ui/parts/VerticalSizedBox.tsx";
-import Battery from "./ui/pieces/Battery.tsx";
+import Battery from "./ui/parts/Battery.tsx";
 
 const AppLayout = styled.div`
   max-width: 500px;
