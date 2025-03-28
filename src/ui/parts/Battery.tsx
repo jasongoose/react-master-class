@@ -25,7 +25,7 @@ function Battery({currentGauge, totalGauge}: Props) {
   return (
       <BatteryContainer $totalGauge={totalGauge}>
         {gaugeArr.map((gaugeNumber) => (
-            <BatterySegment $isFilled={gaugeNumber <= currentGauge}/>
+            <BatterySegment key={gaugeNumber} $isFilled={gaugeNumber <= currentGauge}/>
         ))}
       </BatteryContainer>
   )
