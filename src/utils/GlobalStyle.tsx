@@ -69,6 +69,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Indie Flower", cursive;
     font-weight: 400;
     font-style: normal;
+    background-color: ${(props) => props.theme.main};
+    color: ${(props) => props.theme.contrast};
   }
 
   a {

@@ -1,11 +1,11 @@
 import type {DefaultTheme} from "styled-components";
 
 export const darkTheme: DefaultTheme = {
-  textColor: 'whiteSmoke',
-  bgColor: '#111',
+  main: '#111',
+  contrast: 'whiteSmoke',
 }
 
 export const lightTheme: DefaultTheme = {
-  textColor: '#111',
-  bgColor: 'whiteSmoke',
+  main: 'whiteSmoke',
+  contrast: '#111',
 }
