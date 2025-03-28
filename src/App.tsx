@@ -29,7 +29,7 @@ const Title = styled.h1`
 const ContentsLayout = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px;
+  box-sizing: border-box;
 `;
 
 const DigitsLayout = styled.div`
@@ -103,7 +103,7 @@ function App() {
   return (
       <AppLayout>
         <Title>Pomodoro</Title>
-        <VerticalSizedBox $size={50} $unit={'px'}/>
+        <VerticalSizedBox $size={80} $unit={'px'}/>
         <ContentsLayout>
           <AnimatePresence initial={false}>
             <DigitsLayout>
@@ -121,17 +121,17 @@ function App() {
               offText="Start"
               handleToggleChipClick={handleToggleChipClick}
           />
-          <VerticalSizedBox $size={50} $unit={'px'}/>
+          <VerticalSizedBox $size={100} $unit={'px'}/>
           <ProgressLayout>
             <ProgressTitle>Round</ProgressTitle>
             <Battery currentGauge={currentRound} totalGauge={totalRounds}/>
           </ProgressLayout>
-          <VerticalSizedBox $size={50} $unit={'px'}/>
+          <VerticalSizedBox $size={30} $unit={'px'}/>
           <ProgressLayout>
             <ProgressTitle>Goal</ProgressTitle>
             <Battery currentGauge={currentGoal} totalGauge={totalGoals}/>
           </ProgressLayout>
-          <VerticalSizedBox $size={100} $unit={'px'}/>
+          <VerticalSizedBox $size={150} $unit={'px'}/>
           <ResetButton onClick={resetTimer}>Reset</ResetButton>
         </ContentsLayout>
       </AppLayout>
