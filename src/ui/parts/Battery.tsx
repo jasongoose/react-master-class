@@ -15,8 +15,7 @@ const BatteryContainer = styled.div<{ $totalGauge: number; }>`
 
 const BatterySegment = styled.div<{ $isFilled: boolean }>`
   height: 30px;
-  background-color: ${(props) => props.$isFilled ? 'green' : 'transparent'};
-  outline: 1px dashed ${(props) => props.$isFilled ? 'none' : 'green'};
+  background-color: ${(props) => props.$isFilled ? props.theme.contrast : 'transparent'};
 `;
 
 function Battery({currentGauge, totalGauge}: Props) {
