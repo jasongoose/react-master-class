@@ -54,10 +54,10 @@ export const progressAtom = atom(
     }
 );
 
-export const roundStatusAtom = atom((get) => {
-  return `${get(progressAtom)['roundCount']} / ${MAXIMUM_ROUND_COUNT}`;
+export const roundStatusAtom = atom((get): [number, number] => {
+  return [get(progressAtom)['roundCount'], MAXIMUM_ROUND_COUNT];
 });
 
-export const goalStatusAtom = atom((get) => {
-  return `${get(progressAtom)['goalCount']} / ${MAXIMUM_GOAL_COUNT}`;
+export const goalStatusAtom = atom((get): [number, number] => {
+  return [get(progressAtom)['goalCount'], MAXIMUM_GOAL_COUNT];
 });
