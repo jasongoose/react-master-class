@@ -13,8 +13,8 @@ const ToggleContainer = styled.div<{ $isOn: boolean }>`
   height: 50px;
   display: flex;
   justify-content: ${(props) => props.$isOn ? "flex-start" : "flex-end"};
-  outline: 1px solid black;
-  background-color: black;
+  outline: 1px solid ${(props) => props.theme.contrast};
+  background-color: ${(props) => props.theme.contrast};
 `;
 
 const ToggleChip = styled(motion.div)`
@@ -22,13 +22,14 @@ const ToggleChip = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) => props.theme.main};
   border-collapse: collapse;
   cursor: pointer;
 `;
 
 const ToggleChipText = styled.span`
   font-size: 30px;
+  color: ${(props) => props.theme.contrast};
 `;
 
 function ToggleSlider({isOn, onText, offText, handleToggleChipClick}: Props) {

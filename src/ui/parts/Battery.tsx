@@ -10,7 +10,7 @@ const BatteryContainer = styled.div<{ $totalGauge: number; }>`
   grid-template-columns: ${(props) => `repeat(${props.$totalGauge}, 1fr)`};
   gap: 5px;
   padding: 5px;
-  outline: 1px solid black;
+  outline: 1px solid ${(props) => props.theme.contrast};
 `;
 
 const BatterySegment = styled.div<{ $isFilled: boolean }>`

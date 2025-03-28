@@ -52,7 +52,7 @@ const ProgressTitle = styled.h2`
 
 const ResetButton = styled.div`
   height: 50px;
-  outline: 1px solid black;
+  outline: 1px solid ${(props) => props.theme.contrast};
   display: flex;
   align-items: center;
   justify-content: center;
