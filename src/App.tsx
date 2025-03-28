@@ -5,45 +5,66 @@ import {appAtom} from "./atoms/app.ts";
 import {isTimerRunningAtom, timeLeftAtom, TimerAction} from "./atoms/timer.ts";
 import {goalStatusAtom, roundStatusAtom} from "./atoms/progress.ts";
 import {calcDecimalDigits, calcMinutesFromSeconds, calcSecondsLeft} from "./utils/math.ts";
+import SingleDigitCard from "./ui/pieces/SingleDigitCard.tsx";
+import ToggleSlider from "./ui/parts/ToggleSlider.tsx";
 import {VerticalSizedBox} from "./ui/parts/VerticalSizedBox.tsx";
+import Battery from "./ui/pieces/Battery.tsx";
 
 const AppLayout = styled.div`
-  height: 100vh;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
 `;
 
 const Title = styled.h1`
   width: 100%;
-  font-size: 50px;
+  font-size: 100px;
   text-align: center;
   padding: 10px 0;
 `;
 
-const TimerDigitsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px
+const ContentsLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
 `;
 
-const ButtonsContainer = styled.div`
+const DigitsLayout = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
+  gap: 5px;
 `;
 
-const ProgressContainer = styled.div`
+const ProgressLayout = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 5px;
+`;
+
+const ProgressTitle = styled.h2`
+  font-size: 40px;
+`;
+
+const ResetButton = styled.div`
+  height: 50px;
+  outline: 1px solid black;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
 `;
 
 function App() {
   const dispatch = useSetAtom(appAtom);
   const isTimerRunning = useAtomValue(isTimerRunningAtom);
   const timeLeft = useAtomValue(timeLeftAtom);
-  const roundStatus = useAtomValue(roundStatusAtom);
-  const goalStatus = useAtomValue(goalStatusAtom);
+  const [currentRound, totalRounds] = useAtomValue(roundStatusAtom);
+  const [currentGoal, totalGoals] = useAtomValue(goalStatusAtom);
 
   const minutesDecimalDigits = calcDecimalDigits(calcMinutesFromSeconds(timeLeft));
   const secondsLeftDecimalDigits = calcDecimalDigits(calcSecondsLeft(timeLeft));
@@ -74,25 +95,47 @@ function App() {
     dispatch({type: TimerAction.RESET});
   }
 
+  const handleToggleChipClick = () => {
+    (isTimerRunning ? pauseTimer : startTimer)();
+  }
+
   return (
       <AppLayout>
         <Title>Pomodoro</Title>
-        <TimerDigitsContainer>
-          <span>{minutesDecimalDigits[0]}</span>
-          <span>{minutesDecimalDigits[1]}</span>
-          <span>{secondsLeftDecimalDigits[0]}</span>
-          <span>{secondsLeftDecimalDigits[1]}</span>
-        </TimerDigitsContainer>
-        <ButtonsContainer>
-          <button onClick={startTimer}>Start</button>
-          <button onClick={pauseTimer}>Pause</button>
-          <button onClick={resetTimer}>Reset</button>
-        </ButtonsContainer>
-        <VerticalSizedBox $size={100} $unit={'px'}/>
-        <ProgressContainer>
-          <span>{`round:: ${roundStatus}`}</span>
-          <span>{`goal:: ${goalStatus}`}</span>
-        </ProgressContainer>
+        <ContentsLayout>
+          <DigitsLayout>
+            {/*<AnimatePresence initial={false}>*/}
+            {/*  <SingleDigitCard key={minutesDecimalDigits[0]}>{minutesDecimalDigits[0]}</SingleDigitCard>*/}
+            {/*  <SingleDigitCard key={minutesDecimalDigits[1]}>{minutesDecimalDigits[1]}</SingleDigitCard>*/}
+            {/*  <SingleDigitCard>:</SingleDigitCard>*/}
+            {/*  <SingleDigitCard key={secondsLeftDecimalDigits[0]}>{secondsLeftDecimalDigits[0]}</SingleDigitCard>*/}
+            {/*  <SingleDigitCard key={secondsLeftDecimalDigits[1]}>{secondsLeftDecimalDigits[1]}</SingleDigitCard>*/}
+            {/*</AnimatePresence>*/}
+            <SingleDigitCard>{minutesDecimalDigits[0]}</SingleDigitCard>
+            <SingleDigitCard>{minutesDecimalDigits[1]}</SingleDigitCard>
+            <SingleDigitCard>:</SingleDigitCard>
+            <SingleDigitCard>{secondsLeftDecimalDigits[0]}</SingleDigitCard>
+            <SingleDigitCard>{secondsLeftDecimalDigits[1]}</SingleDigitCard>
+          </DigitsLayout>
+          <ToggleSlider
+              isOn={!isTimerRunning}
+              onText="Pause"
+              offText="Start"
+              handleToggleChipClick={handleToggleChipClick}
+          />
+          <VerticalSizedBox $size={100} $unit={'px'}/>
+          <ProgressLayout>
+            <ProgressTitle>Round</ProgressTitle>
+            <Battery currentGauge={currentRound} totalGauge={totalRounds}/>
+          </ProgressLayout>
+          <VerticalSizedBox $size={30} $unit={'px'}/>
+          <ProgressLayout>
+            <ProgressTitle>Goal</ProgressTitle>
+            <Battery currentGauge={currentGoal} totalGauge={totalGoals}/>
+          </ProgressLayout>
+          <VerticalSizedBox $size={100} $unit={'px'}/>
+          <ResetButton onClick={resetTimer}>Reset</ResetButton>
+        </ContentsLayout>
       </AppLayout>
   )
 }

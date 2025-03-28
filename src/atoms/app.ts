@@ -15,6 +15,8 @@ export const appAtom = atom(
           break;
         case TimerAction.RESET:
           set(timerAtom, generateInitialTimer());
+          set(progressAtom, {type: ProgressAction.RESET_ROUND_COUNT});
+          set(progressAtom, {type: ProgressAction.RESET_GOAL_COUNT});
           break;
         case TimerAction.TICK:
           // 잔여 시간이 없는 경우, reset
