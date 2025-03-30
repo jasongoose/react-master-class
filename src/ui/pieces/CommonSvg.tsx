@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CommonSvg = styled.svg<{ $size: number }>`
   width: ${(props) => props.$size + 'px'};
@@ -6,4 +6,4 @@ export const CommonSvg = styled.svg<{ $size: number }>`
   path {
     fill: ${(props) => props.theme.contrast};
   }
-`
+`;

@@ -1,9 +1,5 @@
 function App() {
-  return (
-      <>
-        {/* FROMHERE:: */}
-      </>
-  )
+  return <>{/* FROMHERE:: */}</>;
 }
 
-export default App
+export default App;
