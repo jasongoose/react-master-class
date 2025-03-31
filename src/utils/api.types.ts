@@ -1,5 +1,5 @@
 // 영화 정보를 위한 타입
-type Movie = {
+export type Movie = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
