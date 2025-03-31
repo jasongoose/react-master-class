@@ -66,7 +66,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "Indie Flower", cursive;
+    font-family: "Darker Grotesque", sans-serif;
+    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     background-color: ${(props) => props.theme.main};
