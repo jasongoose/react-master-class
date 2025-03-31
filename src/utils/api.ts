@@ -1,18 +1,25 @@
+import type {
+  ComingSoonMoviesResponse,
+  MovieDetail,
+  NowPlayingMoviesResponse,
+  PopularMoviesResponse
+} from './api.types.ts';
+
 const BASE_URL = 'https://movies-api.nomadcoders.workers.dev';
 
-export function getPopular() {
+export function getPopular(): Promise<PopularMoviesResponse> {
   return fetch(`${BASE_URL}/popular`).then((r) => r.json());
 }
 
-export function getNowPlaying() {
+export function getNowPlaying(): Promise<NowPlayingMoviesResponse> {
   return fetch(`${BASE_URL}/now-playing`).then((r) => r.json());
 }
 
-export function getComingSoon() {
+export function getComingSoon(): Promise<ComingSoonMoviesResponse> {
   return fetch(`${BASE_URL}/coming-soon`).then((r) => r.json());
 }
 
-export function getMovie(id: string | number) {
+export function getMovie(id: string | number): Promise<MovieDetail> {
   return fetch(`${BASE_URL}/movie?id=${id}`).then((r) => r.json());
 }
 
