@@ -7,19 +7,19 @@ import type {
 
 const BASE_URL = 'https://movies-api.nomadcoders.workers.dev';
 
-export function getPopular(): Promise<PopularMoviesResponse> {
+export function fetchPopular(): Promise<PopularMoviesResponse> {
   return fetch(`${BASE_URL}/popular`).then((r) => r.json());
 }
 
-export function getNowPlaying(): Promise<NowPlayingMoviesResponse> {
+export function fetchNowPlaying(): Promise<NowPlayingMoviesResponse> {
   return fetch(`${BASE_URL}/now-playing`).then((r) => r.json());
 }
 
-export function getComingSoon(): Promise<ComingSoonMoviesResponse> {
+export function fetchComingSoon(): Promise<ComingSoonMoviesResponse> {
   return fetch(`${BASE_URL}/coming-soon`).then((r) => r.json());
 }
 
-export function getMovie(id: string | number): Promise<MovieDetail> {
+export function fetchMovie(id: string | number): Promise<MovieDetail> {
   return fetch(`${BASE_URL}/movie?id=${id}`).then((r) => r.json());
 }
 
