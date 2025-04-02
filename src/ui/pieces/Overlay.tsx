@@ -7,6 +7,5 @@ export const Overlay = styled(motion.div)<{ $opacity: number }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.main};
-  opacity: ${(props) => props.$opacity};
+  background-color: ${(props) => props.theme.mainBlur};
 `;
