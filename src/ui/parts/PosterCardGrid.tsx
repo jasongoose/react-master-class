@@ -5,6 +5,7 @@ import { useSetAtom } from 'jotai';
 import type { Movie } from '../../utils/api.types.ts';
 import { makeImagePath } from '../../utils/api.ts';
 import { detailMovieIdAtom } from '../../atoms/detail.ts';
+import { Overlay } from '../pieces/Overlay.tsx';
 
 type PosterCardGridProps = {
   movie: Movie;
@@ -25,19 +26,10 @@ const PosterImage = styled.img.attrs({ loading: 'lazy' })`
   object-fit: cover;
 `;
 
-const PosterOverlay = styled(motion.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: ${(props) => props.theme.main};
-  opacity: 0.8;
-  color: ${(props) => props.theme.contrast};
+const PosterOverlay = styled(Overlay)`
   padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
 const UtilButtonContainer = styled.div`
@@ -86,6 +78,7 @@ function PosterCardGrid({ movie }: PosterCardGridProps) {
         alt={movie['original_title']}
       />
       <PosterOverlay
+        $opacity={0.8}
         initial={{ x: '-100%' }}
         animate={{ x: isHovered ? 0 : '-100%' }}
         transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
