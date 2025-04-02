@@ -6,6 +6,11 @@ import { Overlay } from '../pieces/Overlay.tsx';
 import { detailMovieIdAtom } from '../../atoms/detail.ts';
 import { fetchMovie, makeBgPath } from '../../utils/api.ts';
 import Loader from '../pieces/Loader.tsx';
+import {
+  calcMinutesLeft,
+  calcMinutesToHours,
+  numberWithComma
+} from '../../utils/format.ts';
 
 const ModalOverlay = styled(Overlay)`
   display: flex;
@@ -56,8 +61,31 @@ const DetailMovieContents = styled.div`
   width: 100%;
   height: 60%;
   background-color: ${(props) => props.theme.main};
+  color: ${(props) => props.theme.contrast};
   position: absolute;
   bottom: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h1 {
+    font-size: 100px;
+  }
+
+  p {
+    font-size: 30px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    li {
+      font-size: 20px;
+    }
+  }
 `;
 
 function DetailMovieModal() {
@@ -86,7 +114,19 @@ function DetailMovieModal() {
             />
             <GradientOverlay />
           </ImageWrapper>
-          <DetailMovieContents />
+          <DetailMovieContents>
+            <h1>{detailMovie?.title}</h1>
+            <p>{detailMovie?.overview}</p>
+            <ul>
+              <li>Budget: ${numberWithComma(detailMovie?.budget ?? '')}</li>
+              <li>Revenue: ${numberWithComma(detailMovie?.revenue ?? '')}</li>
+              <li>
+                Runtime:{' '}
+                {`${calcMinutesToHours(detailMovie?.runtime ?? 0)}H ${calcMinutesLeft(detailMovie?.runtime ?? 0)}M`}
+              </li>
+              <li>Rating: {detailMovie?.vote_average}</li>
+            </ul>
+          </DetailMovieContents>
         </DetailMovieModalContainer>
       )}
     </ModalOverlay>
