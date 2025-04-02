@@ -1,3 +1,3 @@
 import { atom } from 'jotai';
 
-export const detailMovieId = atom(-1);
+export const detailMovieIdAtom = atom(-1);

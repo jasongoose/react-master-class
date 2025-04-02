@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { motion } from 'motion/react';
+import { useState } from 'react';
+import { useSetAtom } from 'jotai';
 import type { Movie } from '../../utils/api.types.ts';
 import { makeImagePath } from '../../utils/api.ts';
-import { useState } from 'react';
+import { detailMovieIdAtom } from '../../atoms/detail.ts';
 
 type PosterCardGridProps = {
   movie: Movie;
@@ -59,6 +61,7 @@ const UtilButton = styled.div`
 `;
 
 function PosterCardGrid({ movie }: PosterCardGridProps) {
+  const setDetailMovieId = useSetAtom(detailMovieIdAtom);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -67,6 +70,10 @@ function PosterCardGrid({ movie }: PosterCardGridProps) {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const handleDetailsButtonClick = () => {
+    setDetailMovieId(movie['id']);
   };
 
   return (
@@ -87,7 +94,7 @@ function PosterCardGrid({ movie }: PosterCardGridProps) {
           <UtilButton>Play</UtilButton>
           <UtilButton>Add to my picks</UtilButton>
           <UtilButton>Recommend</UtilButton>
-          <UtilButton>Details</UtilButton>
+          <UtilButton onClick={handleDetailsButtonClick}>Details</UtilButton>
         </UtilButtonContainer>
       </PosterOverlay>
     </PosterCardContainer>
