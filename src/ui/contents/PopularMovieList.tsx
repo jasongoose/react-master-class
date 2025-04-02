@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchPopular } from '../../utils/api.ts';
-import SamplePosterCard from '../parts/SamplePosterCard.tsx';
-import { PosterCardGroup } from '../pieces/PosterCardGroup.tsx';
+import { PosterCardGridGroup } from '../pieces/PosterCardGridGroup.tsx';
+import PosterCardGrid from '../parts/PosterCardGrid.tsx';
 
 function PopularMovieList() {
   const { data: popularMovieList } = useSuspenseQuery({
@@ -10,11 +10,11 @@ function PopularMovieList() {
   });
 
   return (
-    <PosterCardGroup>
+    <PosterCardGridGroup>
       {popularMovieList.results.map((movie) => (
-        <SamplePosterCard key={movie['id']} movie={movie} />
+        <PosterCardGrid key={movie['id']} movie={movie} />
       ))}
-    </PosterCardGroup>
+    </PosterCardGridGroup>
   );
 }
 
