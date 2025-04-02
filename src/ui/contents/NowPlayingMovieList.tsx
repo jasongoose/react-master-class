@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { PosterCardGroup } from '../pieces/PosterCardGroup.tsx';
 import { fetchNowPlaying } from '../../utils/api.ts';
-import PosterCard from '../parts/PosterCard.tsx';
+import SamplePosterCard from '../parts/SamplePosterCard.tsx';
 
 function NowPlayingMovieList() {
   const { data: nowPlayingMovieList } = useSuspenseQuery({
@@ -12,7 +12,7 @@ function NowPlayingMovieList() {
   return (
     <PosterCardGroup>
       {nowPlayingMovieList.results.map((movie) => (
-        <PosterCard key={movie['id']} movie={movie} />
+        <SamplePosterCard key={movie['id']} movie={movie} />
       ))}
     </PosterCardGroup>
   );
