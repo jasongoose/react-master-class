@@ -14,7 +14,6 @@ type PosterCardGridProps = {
 const PosterCardContainer = styled(motion.li)`
   width: 100%;
   height: auto;
-  cursor: pointer;
   break-inside: avoid;
   position: relative;
   overflow: hidden;
@@ -49,6 +48,7 @@ const UtilButton = styled.div`
 
   &:last-child:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 `;
 

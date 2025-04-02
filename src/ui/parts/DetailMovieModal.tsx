@@ -86,6 +86,25 @@ const DetailMovieContents = styled.div`
       font-size: 20px;
     }
   }
+
+  span {
+    display: block;
+    width: fit-content;
+    justify-self: flex-end;
+    text-align: right;
+    font-size: 20px;
+    color: ${(props) => props.theme.contrast};
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+`;
+
+const CloseButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 function DetailMovieModal() {
@@ -97,12 +116,12 @@ function DetailMovieModal() {
     enabled: detailMovieId !== null
   });
 
-  const handleOverlayClick = () => {
+  const handleCloseTextClick = () => {
     setDetailMovieId(null);
   };
 
   return (
-    <ModalOverlay $opacity={0.5} onClick={handleOverlayClick}>
+    <ModalOverlay $opacity={0.5}>
       {isDetailMovieLoading ? (
         <Loader />
       ) : (
@@ -126,6 +145,9 @@ function DetailMovieModal() {
               </li>
               <li>Rating: {detailMovie?.vote_average}</li>
             </ul>
+            <CloseButtonWrapper>
+              <span onClick={handleCloseTextClick}>Close</span>
+            </CloseButtonWrapper>
           </DetailMovieContents>
         </DetailMovieModalContainer>
       )}
