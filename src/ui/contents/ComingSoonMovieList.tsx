@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { PosterCardGridGroup } from '../pieces/PosterCardGridGroup.tsx';
+import { PosterCardGroup } from '../pieces/PosterCardGroup.tsx';
 import { fetchComingSoon } from '../../utils/api.ts';
-import PosterCardGrid from '../parts/PosterCardGrid.tsx';
+import PosterCard from '../parts/PosterCard.tsx';
 
 function ComingSoonMovieList() {
   const { data: comingSoonMovieList } = useSuspenseQuery({
@@ -10,11 +10,11 @@ function ComingSoonMovieList() {
   });
 
   return (
-    <PosterCardGridGroup>
+    <PosterCardGroup>
       {comingSoonMovieList.results.map((movie) => (
-        <PosterCardGrid key={movie['id']} movie={movie} />
+        <PosterCard key={movie['id']} movie={movie} />
       ))}
-    </PosterCardGridGroup>
+    </PosterCardGroup>
   );
 }
 

@@ -52,7 +52,7 @@ const UtilButton = styled.div`
   }
 `;
 
-function PosterCardGrid({ movie }: PosterCardGridProps) {
+function PosterCard({ movie }: PosterCardGridProps) {
   const setDetailMovieId = useSetAtom(detailMovieIdAtom);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -94,4 +94,4 @@ function PosterCardGrid({ movie }: PosterCardGridProps) {
   );
 }
 
-export default PosterCardGrid;
+export default PosterCard;
