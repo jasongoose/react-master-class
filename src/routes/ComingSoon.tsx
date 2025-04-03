@@ -4,13 +4,9 @@ import ComingSoonMovieList from '../ui/contents/ComingSoonMovieList.tsx';
 
 function ComingSoon() {
   return (
-    <>
-      <h1>Coming Soon</h1>
-      {/* TODO:: ErrorBoundary 적용해볼 것 */}
-      <Suspense fallback={<Loader />}>
-        <ComingSoonMovieList />
-      </Suspense>
-    </>
+    <Suspense fallback={<Loader />}>
+      <ComingSoonMovieList />
+    </Suspense>
   );
 }
 
