@@ -68,6 +68,7 @@ const DetailMovieContents = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: auto;
 
   h1 {
     font-size: 100px;
@@ -81,7 +82,6 @@ const DetailMovieContents = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-
     li {
       font-size: 20px;
     }
@@ -97,6 +97,7 @@ const DetailMovieContents = styled.div`
     &:hover {
       text-decoration: underline;
       cursor: pointer;
+      color: red;
     }
   }
 `;
