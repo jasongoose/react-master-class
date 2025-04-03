@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
-import CommonLayout from './ui/pieces/CommonLayout.tsx';
+import CommonLayout from './ui/parts/CommonLayout.tsx';
 import Home from './routes/Home.tsx';
 import ComingSoon from './routes/ComingSoon.tsx';
 import NowPlaying from './routes/NowPlaying.tsx';

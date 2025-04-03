@@ -2,8 +2,8 @@ import { Outlet } from 'react-router';
 import { useAtomValue } from 'jotai/react';
 import styled from 'styled-components';
 import { detailMovieModalOpenStatusAtom } from '../../atoms/detail.ts';
-import DetailMovieModal from '../parts/DetailMovieModal.tsx';
-import VerticalNavBar from '../parts/VerticalNavBar.tsx';
+import DetailMovieModal from './DetailMovieModal.tsx';
+import VerticalNavBar from './VerticalNavBar.tsx';
 
 const MainArticle = styled.article<{ $isScrollable: boolean }>`
   max-width: 1200px;
