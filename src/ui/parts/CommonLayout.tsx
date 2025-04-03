@@ -14,6 +14,7 @@ const MainArticle = styled.article<{ $isScrollable: boolean }>`
   padding: 10px;
   position: relative;
   overflow: ${(props) => (props.$isScrollable ? 'auto' : 'hidden')};
+  scrollbar-width: none;
 `;
 
 const StickyNavWrapper = styled.div`

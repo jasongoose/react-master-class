@@ -69,6 +69,7 @@ const DetailMovieContents = styled.div`
   flex-direction: column;
   gap: 20px;
   overflow: auto;
+  scrollbar-width: none;
 
   h1 {
     font-size: 100px;
@@ -102,12 +103,6 @@ const DetailMovieContents = styled.div`
   }
 `;
 
-const CloseButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-`;
-
 function DetailMovieModal() {
   const [detailMovieId, setDetailMovieId] = useAtom(detailMovieIdAtom);
 
@@ -117,12 +112,12 @@ function DetailMovieModal() {
     enabled: detailMovieId !== null
   });
 
-  const handleCloseTextClick = () => {
+  const handleModalOverlayClick = () => {
     setDetailMovieId(null);
   };
 
   return (
-    <ModalOverlay $opacity={0.5}>
+    <ModalOverlay $opacity={0.5} onClick={handleModalOverlayClick}>
       {isDetailMovieLoading ? (
         <Loader />
       ) : (
@@ -146,9 +141,6 @@ function DetailMovieModal() {
               </li>
               <li>Rating: {detailMovie?.vote_average}</li>
             </ul>
-            <CloseButtonWrapper>
-              <span onClick={handleCloseTextClick}>Close</span>
-            </CloseButtonWrapper>
           </DetailMovieContents>
         </DetailMovieModalContainer>
       )}
