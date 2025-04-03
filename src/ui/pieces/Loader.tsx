@@ -1,6 +1,23 @@
-// TODO:: Netflex svg 이미지에 path animation 적용한 버전으로 수정할 것
+import styled from 'styled-components';
+
+const LoaderContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 50px;
+  }
+`;
+
 function Loader() {
-  return <span>Loading...</span>;
+  return (
+    <LoaderContainer>
+      <span>Loading...</span>;
+    </LoaderContainer>
+  );
 }
 
 export default Loader;
